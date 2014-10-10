@@ -9,7 +9,7 @@ class Home extends Controller
 	{
 		$user = $this->model('user');
 		$user->name = $name;
-		$this->view('home/index', []);
+		$this->view('home/index', ['name' => $user->name]);
 	}
 
 	public function about_us()
@@ -20,6 +20,11 @@ class Home extends Controller
 	public function contact_us()
 	{
 		$this->view('home/contact_us', []);
+	}
+
+	public function blog($blog_id = '')
+	{
+		$this->view('home/blog', ['blog_id' => $blog_id]);
 	}
 
 }

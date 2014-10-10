@@ -18,9 +18,9 @@
 		return array("markup" => "<div id=\"formulario-contacto\">
 					<h1 id=\"inicio-sesion\">Contactanos</h1>
 					<form action=\"#\" method=\"post\">
-						<label><input type=\"text\" name=\"user-name\" placeholder=\"Nombre del usuario:\"></label>
-						<label><input type=\"text\" name=\"asunto\" placeholder=\"Asunto:\"></label>
-						<label><input type=\"textarea\" name=\"mensaje\" placeholder=\"Mensaje:\"></label>
+						<input type=\"text\" name=\"user-name\" placeholder=\"Nombre del usuario:\">
+						<input type=\"text\" name=\"asunto\" placeholder=\"Asunto:\">
+						<textarea name=\"mensaje\" placeholder=\"Mensaje:\"></textarea>
 						<input type=\"submit\" value=\"Enviar\">
 					</form>
 				</div>");
