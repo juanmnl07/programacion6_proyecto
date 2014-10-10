@@ -1,0 +1,71 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  margin: 0px; }
+
+section {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  section:after {
+    content: "";
+    display: table;
+    clear: both; }
+  section #main-content {
+    max-width: 68em;
+    margin-left: auto;
+    margin-right: auto; }
+    section #main-content:after {
+      content: "";
+      display: table;
+      clear: both; }
+    section #main-content #content {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 65.88078%; }
+      section #main-content #content:last-child {
+        margin-right: 0; }
+      section #main-content #content #formulario-inicio-sesion, section #main-content #content #formulario-contacto {
+        float: left;
+        display: block;
+        margin-right: 2.35765%;
+        width: 65.88078%; }
+        section #main-content #content #formulario-inicio-sesion:last-child, section #main-content #content #formulario-contacto:last-child {
+          margin-right: 0; }
+    section #main-content #sidebar {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 31.76157%; }
+      section #main-content #sidebar:last-child {
+        margin-right: 0; }
+  section header {
+    max-width: 68em;
+    margin-left: auto;
+    margin-right: auto; }
+    section header:after {
+      content: "";
+      display: table;
+      clear: both; }
+    section header #sub-header-first {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 100%;
+      margin-right: 0; }
+      section header #sub-header-first:last-child {
+        margin-right: 0; }
+      section header #sub-header-first #menu-usuario {
+        float: left;
+        display: block;
+        margin-right: 2.35765%;
+        width: 14.70196%;
+        margin-left: 85.29804%; }
+        section header #sub-header-first #menu-usuario:last-child {
+          margin-right: 0; }
+
+/*# sourceMappingURL=layout.css.map */

@@ -1,0 +1,31 @@
+@import "../bourbon/bourbon";
+@import "../neat/neat";
+
+// layout, define number of columns
+
+body {
+	margin: 0px;
+}
+
+section {
+	@include outer-container();
+	#main-content { 
+		@include outer-container();
+		#content { 
+			@include span-columns(8); 
+			#formulario-inicio-sesion, #formulario-contacto{ 
+				@include span-columns(8); 
+			}
+		}
+		#sidebar { @include span-columns(4); }
+	}  
+
+	header {
+		@include outer-container();
+		#sub-header-first {
+			@include span-columns(12);
+			@include omega;
+			#menu-usuario { @include span-columns(2); @include shift(10);}
+		}
+	}
+}

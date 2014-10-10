@@ -1,0 +1,10 @@
+<div id="main-content" class="region">
+<div id="content">
+	{% block content %}
+		{{ content.markup | raw }}
+	{% endblock %}
+</div>
+{% block sidebar %}
+	{% include 'sidebar.html' %}
+{% endblock %}
+</div>
