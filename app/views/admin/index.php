@@ -9,20 +9,25 @@
 		$twig = new Twig_Environment($loader);
 
 		$template = $twig->loadTemplate('base.html');
-		echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Index'));
+		echo $template->render(array('content' => obtenerContenido(), 'title' => 'Admin'));
 
 	}
 
 	//Generar formulario
-	function obtenerFormulario() {
-		return array("markup" => "<div id=\"formulario-inicio-sesion\">
-											<h1 id=\"inicio-sesion\">Inicio de sesion</h1>
-											<form action=\"#\" method=\"post\">
-												<label><input type=\"text\" name=\"user-name\" placeholder=\"Nombre del usuario:\"></label>
-												<label><input type=\"password\" name=\"clave\" placeholder=\"Clave:\"></label>
-												<input type=\"submit\" value=\"Ingresar\">
-											</form>
-										  </div>");
+	function obtenerContenido() {
+		return array("markup" => '<button type="button" class="js-menu-trigger sliding-menu-button">
+								    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/menu.png" alt="Menu Icon">
+								  </button>
+
+								<nav class="js-menu sliding-menu-content">
+								  <ul>
+								    <li><a href="javascript:void(0)">Item 1</a></li>
+								    <li><a href="javascript:void(0)">Item 2</a></li>
+								    <li><a href="javascript:void(0)">Item 3</a></li>
+								  </ul>
+								</nav>
+
+								<div class="js-menu-screen menu-screen"></div>');
 	}
 	
 ?>

@@ -4,14 +4,9 @@
 */
 class Admin extends Controller
 {
-	public function login()
+	public function index()
 	{
-		$this->view('admin/login', []);
-	}
-
-	public function register()
-	{
-		$this->view('admin/register', []);
+		$this->view('admin/index', []);
 	}
 
 }

@@ -27,4 +27,14 @@ class Home extends Controller
 		$this->view('home/blog', ['blog_id' => $blog_id]);
 	}
 
+	public function login()
+	{
+		$this->view('home/login', []);
+	}
+
+	public function register()
+	{
+		$this->view('home/register', []);
+	}
+
 }
