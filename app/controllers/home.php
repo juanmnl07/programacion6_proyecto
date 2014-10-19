@@ -2,6 +2,9 @@
 /**
 * 
 */
+
+//incluimos el recurso del modelo respectivo al controlador para manejar la bd
+
 class Home extends Controller
 {
 	
@@ -34,7 +37,8 @@ class Home extends Controller
 
 	public function register()
 	{
-		$this->view('home/register', []);
+		$user = $this->model('user');
+		$this->view('home/register', ['test' => $user->getConnection()]);
 	}
 
 }
