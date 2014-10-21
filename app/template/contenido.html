@@ -1,10 +1,13 @@
 <div id="main-content" class="region">
+	<div id="mensajes">
+		{% if mensaje['estatus'] == 0 %} <div id="error">{{mensaje['mensaje']}}</div>{% else %} <div id="exito">{{mensaje['mensaje']}}</div><div id="mensaje-adicional">{{ mensaje2 }}</div> {% endif %}
+	</div>
 <div id="content">
 	{% block content %}
 		{{ content.markup | raw }}
 	{% endblock %}
 </div>
-{% block sidebar %}
-	{% include 'sidebar.html' %}
-{% endblock %}
+	{% block sidebar %}
+		{% include 'sidebar.html' %}
+	{% endblock %}
 </div>

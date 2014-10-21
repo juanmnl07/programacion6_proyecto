@@ -9,25 +9,27 @@
 		$twig = new Twig_Environment($loader);
 
 		$template = $twig->loadTemplate('base.html');
-		echo $template->render(array('content' => obtenerContenido(), 'title' => 'Admin'));
+	
+		//verificamos si el usuario ingreso por medio del formulario de inicio de sesio o por medio del registro
+		if(isset($data['session'])){
+			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session']), 'title' => 'Dashboard'));
+		}else {
+			echo $template->render(array('content' => obtenerContenidoUsuarioRegistro(), 'title' => 'Dashboard','mensaje'=>$data['resultado']));
+		}
 
-	}
+	}?>
 
+<?php
 	//Generar formulario
-	function obtenerContenido() {
-		return array("markup" => '<button type="button" class="js-menu-trigger sliding-menu-button">
-								    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/menu.png" alt="Menu Icon">
-								  </button>
+	function obtenerContenidoUsuarioSesion($user_info) {
+		return array("markup" => "<div id=\"user-info\"><div id=\"presonal-information\"><label>Nombre completo: " .$user_info['nombre_completo']."</label><label>Dia y hora de la ultima sesion: ".$user_info['fecha']."</label></div></div>");
 
-								<nav class="js-menu sliding-menu-content">
-								  <ul>
-								    <li><a href="javascript:void(0)">Item 1</a></li>
-								    <li><a href="javascript:void(0)">Item 2</a></li>
-								    <li><a href="javascript:void(0)">Item 3</a></li>
-								  </ul>
-								</nav>
-
-								<div class="js-menu-screen menu-screen"></div>');
 	}
+
+	function obtenerContenidoUsuarioRegistro() {
+		return array("markup" => "test");
+
+	}
+	
 	
 ?>

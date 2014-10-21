@@ -17,7 +17,7 @@
 	function obtenerFormulario() {
 		return array("markup" => "<div id=\"formulario-inicio-sesion\">
 											<h1 id=\"inicio-sesion\">Inicio de sesion</h1>
-											<form action=\"#\" method=\"post\">
+											<form action=\"/public/admin/index\" method=\"post\">
 												<label><input type=\"text\" name=\"user-name\" placeholder=\"Nombre del usuario:\"></label>
 												<label><input type=\"password\" name=\"clave\" placeholder=\"Clave:\"></label>
 												<input type=\"submit\" value=\"Ingresar\">

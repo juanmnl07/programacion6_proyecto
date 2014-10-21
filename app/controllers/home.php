@@ -10,9 +10,7 @@ class Home extends Controller
 	
 	public function index($name = '')
 	{
-		$user = $this->model('user');
-		$user->name = $name;
-		$this->view('home/index', ['name' => $user->name]);
+		$this->view('home/index', []);
 	}
 
 	public function about_us()
@@ -37,8 +35,9 @@ class Home extends Controller
 
 	public function register()
 	{
-		$user = $this->model('user');
-		$this->view('home/register', ['test' => $user->getConnection()]);
+		
+		$this->view('home/register', []);
+		
 	}
 
 }
