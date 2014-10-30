@@ -2,14 +2,15 @@
 /**
 * 
 */
+
+//incluimos el recurso del modelo respectivo al controlador para manejar la bd
+
 class Home extends Controller
 {
 	
 	public function index($name = '')
 	{
-		$user = $this->model('user');
-		$user->name = $name;
-		$this->view('home/index', ['name' => $user->name]);
+		$this->view('home/index', []);
 	}
 
 	public function about_us()
@@ -34,7 +35,9 @@ class Home extends Controller
 
 	public function register()
 	{
+		
 		$this->view('home/register', []);
+		
 	}
 
 }

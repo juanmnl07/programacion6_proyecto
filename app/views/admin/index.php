@@ -9,7 +9,13 @@
 		$twig = new Twig_Environment($loader);
 
 		$template = $twig->loadTemplate('base.html');
-		echo $template->render(array('content' => obtenerContenido(), 'title' => 'Admin'));
+	
+		//verificamos si el usuario ingreso por medio del formulario de inicio de sesio o por medio del registro
+		if(isset($data['session'])){
+			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session']), 'title' => 'Dashboard'));
+		}else {
+			echo $template->render(array('content' => obtenerContenidoUsuarioRegistro(), 'title' => 'Dashboard','mensaje'=>$data['resultado']));
+		}
 
 	}
 
@@ -33,7 +39,7 @@
 									    <a href="#" class="tab-link is-active">Datos Personales</a>
 									    <div class="tab-content">
 									    <h4>Datos Personales</h4>
-									      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt pellentesque lorem, id suscipit dolor rutrum id. Morbi facilisis porta volutpat. Fusce adipiscing, mauris quis congue tincidunt, sapien purus suscipit odio, quis dictum odio tortor in sem. Ut sit amet libero nec orci mattis fringilla. Praesent eu ipsum in sapien tincidunt molestie sed ut magna. Nam accumsan dui at orci rhoncus pharetra tincidunt elit ullamcorper. Sed ac mauris ipsum. Nullam imperdiet sapien id purus pretium id aliquam mi ullamcorper.</p>
+									      <div id=\"user-info\"><div id=\"presonal-information\"><label>Nombre completo: ' .$user_info['nombre_completo']."</label><label>Dia y hora de la ultima sesion: ".$user_info['fecha'].'</label></div></div>
 									    </div>
 									  </li>
 									  <li class="tab-header-and-content">
@@ -56,5 +62,11 @@
 									  </li>
 								  </ul>');
 	}
+
+	function obtenerContenidoUsuarioRegistro() {
+		return array("markup" => "test");
+
+	}
+	
 	
 ?>
