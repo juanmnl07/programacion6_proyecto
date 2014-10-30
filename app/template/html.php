@@ -16,6 +16,9 @@
 	{% block head %}
 </head>
 <body>
+	<?php if(file_exists('breadcrumb.html')): ?>
+		<?php print_r(file_get_contents('breadcrumb.html')); ?>
+	<?php endif; ?>
 	<?php if(file_exists('header.php')): ?>
 		<?php print_r(file_get_contents('header.php')); ?>
 	<?php endif; ?>

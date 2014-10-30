@@ -9,10 +9,16 @@ h1, h2, h3, h4, h5, h6, input, form {padding: 0px; margin: 0px; border: none; ba
 
 #main-content {
 	background-color: #FbFbFb;
+  margin: 0.5em 0 0.5em 0;
 }  
 
-#content {
-	padding: 5%;
+#content, #sidebar {
+	padding: 0.5em;
+  margin: 1.0em 0 0 0;
+}
+
+#sidebar {
+  border-left: 1px solid #ddd;
 }
 
 input[type="submit"] { 
@@ -31,8 +37,8 @@ textarea {
 }
 
 input[type="text"], input[type="password"], textarea {
-	padding: 3% 4%; 
-	margin: 3% 0 0 0; 
+	padding: 0.5em 0.5em 0.5em 0; 
+	height: 2.5em;
 	@include border-top-radius(2px);
 	@include border-bottom-radius(2px);
 	@include border-left-radius(2px);
@@ -1000,7 +1006,8 @@ $sliding-menu-color-hover: #fff;
   margin-bottom: $base-line-height;
   position: relative;
   outline: none;
-
+  float: right;
+  margin: 0.5em;
   img {
     height: 1.3em;
   }
@@ -1050,3 +1057,261 @@ $sliding-menu-color-hover: #fff;
 
 // Based on code by Diego Eis
 
+// Breadcrumb
+
+.breadcrumb { 
+  $breadcrumb-border-color: $base-border-color;
+  $breadcrumb-border: 1px solid $breadcrumb-border-color;
+  $breadcrumb-height: $base-spacing * 1.5;
+  $breadcrumb-arrow-color: $breadcrumb-border-color;
+  $breadcrumb-background: $base-background-color;
+  $breadcrumb-inactive-hover-color: $breadcrumb-background;
+  $breadcrumb-color: $medium-gray;
+  $breadcrumb-color-hover: $base-accent-color;
+  $breadcrumb-color-active: $breadcrumb-color;
+
+  margin: 0.5em 0 0 0.5em;
+  @include inline-block;
+  text-align: left;
+  margin-bottom: $base-spacing;
+
+  a {
+    @include inline-block;
+    background-color: $breadcrumb-background;
+    border: $breadcrumb-border;
+    color: $breadcrumb-color;
+    line-height: $breadcrumb-height;
+    margin-right: -5px;
+    font-size: .8em;
+    padding: 0 $breadcrumb-height/4 0 $breadcrumb-height/2;
+    position: relative;
+    text-decoration: none;
+    margin-bottom: 2px;
+
+    &:first-child {
+      padding-left: $breadcrumb-height/2;
+      border-top-left-radius: $base-border-radius;
+      border-bottom-left-radius: $base-border-radius;
+    }
+
+    &:last-child {
+      background-color: $breadcrumb-background;
+      color: $breadcrumb-color-active;
+      border-bottom-right-radius: $base-border-radius;
+      border-top-right-radius: $base-border-radius;
+      padding-right: $breadcrumb-height/2;
+    }
+
+    &:hover {
+      color: $breadcrumb-color-hover;
+      background-color: $breadcrumb-inactive-hover-color;
+    }
+
+    &:hover:after {
+      border-left-color: $breadcrumb-inactive-hover-color;;
+    }
+
+    &:after,
+    &:before {
+      @include position(absolute, 0px auto 0px 100%);
+      border-bottom: $breadcrumb-height/2 solid transparent;
+      border-left: $breadcrumb-height/4 solid transparent;
+      border-top: $breadcrumb-height/2 solid transparent;
+      content: '';
+      display: block;
+      margin: auto;
+      z-index: 2;
+    }
+
+    &:last-child:after,
+    &:last-child:before {
+       border: none;
+    }
+
+    &:before {
+      border-left-color: $breadcrumb-arrow-color;
+      margin-left: 1px;
+      z-index: 1;
+    }
+    &:after {
+      border-left-color: $breadcrumb-background;
+    }
+
+    @include media($medium-screen) {
+      font-size: 1em;
+      padding: 0 $breadcrumb-height/2 0 $breadcrumb-height/1.5;
+    }
+  }
+}
+
+// TABS (CONTENIDO - DASHBOARD)
+
+.accordion-tabs-minimal {
+  $tab-border-color: $base-border-color;
+  $tab-border: 1px solid $tab-border-color;
+  $tab-content-background: $base-background-color;
+  $tab-active-background: $tab-content-background;
+  $tab-inactive-color: $base-background-color;
+  $tab-inactive-hover-color: darken($light-gray, 5);
+  $tab-mode: $medium-screen;
+
+  @include clearfix;
+  margin-bottom: $base-spacing;
+
+  li.tab-header-and-content {
+    @include media($tab-mode) {
+      display: inline;
+    }
+  }
+
+  a.tab-link {
+    background-color: $tab-inactive-color;
+    border-top: $tab-border;
+    color: $dark-gray;
+    display: block;
+    font-weight: 400;
+    padding: $base-spacing/2 $gutter;
+
+    @include media($tab-mode) {
+      @include inline-block;
+      border-top: 0;
+    }
+
+    &:hover {
+      color: $base-link-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.is-active {
+      border-bottom: 0;
+
+      @include media($tab-mode) {
+        border: $tab-border;
+        border-bottom-color: $tab-active-background;
+        margin-bottom: -1px;
+      }
+    }
+  }
+
+  .tab-content {
+    display: none;
+    padding: $base-spacing $gutter;
+
+    @include media($tab-mode) {
+      border-top: $tab-border;
+      float: left;
+    }
+  }
+}
+
+//badges
+.badges {
+  $badge-background: #bfbfbf;
+  $badge-dark-color: $dark-gray;
+  $badge-error-color: $error-color;
+  $badge-notice-color: $notice-color;
+  $badge-success-color: $success-color;
+  $badge-font-color: #fff;
+  $badge-font-size: $base-font-size * .75;
+
+  display: block;
+  margin-bottom: $base-line-height;
+
+  .badge {
+    @include inline-block;
+    background: $badge-background;
+    border-radius: 2em;
+    color: $badge-font-color;
+    font-size: $badge-font-size;
+    font-weight: 600;
+    line-height: 1;
+    padding: .25em 0.5em;
+    text-align: center;
+
+    &.dark {
+      background: $badge-dark-color;
+    }
+
+    &.error {
+      background: $badge-error-color;
+      color: darken($badge-error-color, 60);
+    }
+
+    &.notice {
+      background: $badge-notice-color;
+      color: darken($badge-notice-color, 60);
+    }
+
+    &.success {
+      background: $badge-success-color;
+      color: darken($badge-success-color, 60);
+    }
+  }
+}
+
+.badges.formulario-registro {
+  float: left;
+}
+
+.badges.formulario-registro .badge{
+  margin: 0.75em;
+  float: left;
+}
+
+//tooltip items
+.tooltip-item {
+  $tooltip-background: white;
+  $tooltip-color: $base-font-color;
+  $tooltip-width: 16em;
+  $tooltip-arrow-width: 8px;
+  $tooltip-shadow: 0 2px 2px silver;
+  $tooltip-distance-from-item: 140%;
+  $tooltip-arrow-distance-from-box: -$tooltip-arrow-width * 3.4;
+
+  position: relative;
+
+  &:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tooltip {
+    @include position(absolute, -8em 0 0 11em);
+    @include box-sizing(border-box);
+    @include transition (all 0.2s ease-in-out);
+    bottom: $tooltip-distance-from-item;
+    background-color: $tooltip-background;
+    border-radius: $base-border-radius;
+    color: $tooltip-color;
+    font-size: .9em; // Make sure you use -webkit-backface-visibility: hidden; on the body element to prevent 1px nudging bugs.
+    line-height: 1.5em;
+    margin-left: -($tooltip-width/2);
+    opacity: 0;
+    padding: 1em;
+    box-shadow: $tooltip-shadow;
+    text-align: center;
+    visibility: hidden;
+    min-width: $tooltip-width;
+    z-index: 10;
+    font-family: $serif;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    &:after {
+      @include position(absolute, 4.5em 0 0 0.5em);
+      margin-left: -$tooltip-arrow-width;
+      border: $tooltip-arrow-width solid transparent;
+      color: $tooltip-background;
+      content: '';
+      text-shadow: $tooltip-shadow;
+      font-size: 1.4em;
+      pointer-events: none;
+      bottom: $tooltip-arrow-distance-from-box;
+    }
+  }
+}
