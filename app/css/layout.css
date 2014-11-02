@@ -36,6 +36,13 @@ section {
         width: 65.88078%; }
         section #main-content #content #formulario-inicio-sesion:last-child, section #main-content #content #formulario-contacto:last-child {
           margin-right: 0; }
+        section #main-content #content #formulario-inicio-sesion input[type="text"], section #main-content #content #formulario-inicio-sesion input[type="password"], section #main-content #content #formulario-inicio-sesion textarea, section #main-content #content #formulario-contacto input[type="text"], section #main-content #content #formulario-contacto input[type="password"], section #main-content #content #formulario-contacto textarea {
+          float: left;
+          display: block;
+          margin-right: 2.35765%;
+          width: 82.94039%; }
+          section #main-content #content #formulario-inicio-sesion input[type="text"]:last-child, section #main-content #content #formulario-inicio-sesion input[type="password"]:last-child, section #main-content #content #formulario-inicio-sesion textarea:last-child, section #main-content #content #formulario-contacto input[type="text"]:last-child, section #main-content #content #formulario-contacto input[type="password"]:last-child, section #main-content #content #formulario-contacto textarea:last-child {
+            margin-right: 0; }
     section #main-content #sidebar {
       float: left;
       display: block;

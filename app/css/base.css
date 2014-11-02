@@ -233,10 +233,15 @@ h1, h2, h3, h4, h5, h6, input, form {
   background: none; }
 
 #main-content {
-  background-color: #FbFbFb; }
+  background-color: #FbFbFb;
+  margin: 0.5em 0 0.5em 0; }
 
-#content {
-  padding: 5%; }
+#content, #sidebar {
+  padding: 0.5em;
+  margin: 1.0em 0 0 0; }
+
+#sidebar {
+  border-left: 1px solid #ddd; }
 
 input[type="submit"] {
   padding: 3% 4%;
@@ -257,8 +262,8 @@ textarea {
   height: 150px; }
 
 input[type="text"], input[type="password"], textarea {
-  padding: 3% 4%;
-  margin: 3% 0 0 0;
+  padding: 0.5em 0.5em 0.5em 0;
+  height: 2.5em;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   border-bottom-left-radius: 2px;
@@ -983,7 +988,9 @@ article.type-system-serif {
   font-size: 1em;
   margin-bottom: 1.5;
   position: relative;
-  outline: none; }
+  outline: none;
+  float: right;
+  margin: 0.5em; }
   .sliding-menu-button:hover:not(:disabled) {
     box-shadow: inset 0 1px 0 0 white;
     cursor: pointer;
@@ -1060,5 +1067,183 @@ article.type-system-serif {
   .menu-screen.is-visible {
     opacity: .4;
     visibility: visible; }
+
+.breadcrumb {
+  margin: 0.5em 0 0 0.5em;
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 1.5em; }
+  .breadcrumb a {
+    display: inline-block;
+    background-color: white;
+    border: 1px solid #DDD;
+    color: #999;
+    line-height: 2.25em;
+    margin-right: -5px;
+    font-size: .8em;
+    padding: 0 0.5625em 0 1.125em;
+    position: relative;
+    text-decoration: none;
+    margin-bottom: 2px; }
+    .breadcrumb a:first-child {
+      padding-left: 1.125em;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px; }
+    .breadcrumb a:last-child {
+      background-color: white;
+      color: #999;
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
+      padding-right: 1.125em; }
+    .breadcrumb a:hover {
+      color: #477DCA;
+      background-color: white; }
+    .breadcrumb a:hover:after {
+      border-left-color: white; }
+    .breadcrumb a:after, .breadcrumb a:before {
+      position: absolute;
+      top: 0px;
+      right: auto;
+      bottom: 0px;
+      left: 100%;
+      border-bottom: 1.125em solid transparent;
+      border-left: 0.5625em solid transparent;
+      border-top: 1.125em solid transparent;
+      content: '';
+      display: block;
+      margin: auto;
+      z-index: 2; }
+    .breadcrumb a:last-child:after, .breadcrumb a:last-child:before {
+      border: none; }
+    .breadcrumb a:before {
+      border-left-color: #DDD;
+      margin-left: 1px;
+      z-index: 1; }
+    .breadcrumb a:after {
+      border-left-color: white; }
+    @media screen and (min-width: 40em) {
+      .breadcrumb a {
+        font-size: 1em;
+        padding: 0 1.125em 0 1.5em; } }
+
+.accordion-tabs-minimal {
+  margin-bottom: 1.5em; }
+  .accordion-tabs-minimal:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 40em) {
+    .accordion-tabs-minimal li.tab-header-and-content {
+      display: inline; } }
+  .accordion-tabs-minimal a.tab-link {
+    background-color: white;
+    border-top: 1px solid #DDD;
+    color: #333;
+    display: block;
+    font-weight: 400;
+    padding: 0.75em 1.618em; }
+    @media screen and (min-width: 40em) {
+      .accordion-tabs-minimal a.tab-link {
+        display: inline-block;
+        border-top: 0; } }
+    .accordion-tabs-minimal a.tab-link:hover {
+      color: #477DCA; }
+    .accordion-tabs-minimal a.tab-link:focus {
+      outline: none; }
+    .accordion-tabs-minimal a.tab-link.is-active {
+      border-bottom: 0; }
+      @media screen and (min-width: 40em) {
+        .accordion-tabs-minimal a.tab-link.is-active {
+          border: 1px solid #DDD;
+          border-bottom-color: white;
+          margin-bottom: -1px; } }
+  .accordion-tabs-minimal .tab-content {
+    display: none;
+    padding: 1.5em 1.618em; }
+    @media screen and (min-width: 40em) {
+      .accordion-tabs-minimal .tab-content {
+        border-top: 1px solid #DDD;
+        float: left; } }
+
+.badges {
+  display: block;
+  margin-bottom: 1.5; }
+  .badges .badge {
+    display: inline-block;
+    background: #bfbfbf;
+    border-radius: 2em;
+    color: #fff;
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1;
+    padding: .25em 0.5em;
+    text-align: center; }
+    .badges .badge.dark {
+      background: #333; }
+    .badges .badge.error {
+      background: #FBE3E4;
+      color: #96151b; }
+    .badges .badge.notice {
+      background: #e5edf8;
+      color: #264d85; }
+    .badges .badge.success {
+      background: #E6EFC2;
+      color: #56651a; }
+
+.badges.formulario-registro {
+  float: left; }
+
+.badges.formulario-registro .badge {
+  margin: 0.75em;
+  float: left; }
+
+.tooltip-item {
+  position: relative; }
+  .tooltip-item:hover .tooltip {
+    opacity: 1;
+    visibility: visible; }
+  .tooltip-item .tooltip {
+    position: absolute;
+    top: -8em;
+    right: 0;
+    bottom: 0;
+    left: 11em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    bottom: 140%;
+    background-color: white;
+    border-radius: 3px;
+    color: #333;
+    font-size: .9em;
+    line-height: 1.5em;
+    margin-left: -8em;
+    opacity: 0;
+    padding: 1em;
+    box-shadow: 0 2px 2px silver;
+    text-align: center;
+    visibility: hidden;
+    min-width: 16em;
+    z-index: 10;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif; }
+    .tooltip-item .tooltip p {
+      margin-bottom: 0; }
+    .tooltip-item .tooltip:after {
+      position: absolute;
+      top: 4.5em;
+      right: 0;
+      bottom: 0;
+      left: 0.5em;
+      margin-left: -8px;
+      border: 8px solid transparent;
+      color: white;
+      content: '';
+      text-shadow: 0 2px 2px silver;
+      font-size: 1.4em;
+      pointer-events: none;
+      bottom: -27.2px; }
 
 /*# sourceMappingURL=base.css.map */

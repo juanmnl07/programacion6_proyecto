@@ -15,6 +15,9 @@ section {
 			@include span-columns(8); 
 			#formulario-inicio-sesion, #formulario-contacto{ 
 				@include span-columns(8); 
+				input[type="text"], input[type="password"], textarea {
+				  @include span-columns(10); 
+				}
 			}
 		}
 		#sidebar { @include span-columns(4); }

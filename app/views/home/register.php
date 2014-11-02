@@ -27,7 +27,19 @@
 												<input type=\"text\" name=\"birthday\" placeholder=\"Fecha de nacimiento:\" required>
 												<input type=\"text\" name=\"correo-electronico\" placeholder=\"Correo electronico:\" required>
 												<input type=\"text\" name=\"user-name\" placeholder=\"Nombre del usuario:\" required>
-												<input type=\"password\" name=\"clave\" placeholder=\"Clave:\" required>
+												<div class=\"badges formulario-registro tooltip-item\">
+													<span class=\"badge\">?</span>
+													  <div class=\"tooltip\">
+													    <p>Utilice un nombre que sea familir y facil de recordar</p>
+													  </div>
+												</div>
+												<input type=\"password\" name=\"clave\" placeholder=\"Clave:\">
+												<div class=\"badges formulario-registro tooltip-item\">
+													<span class=\"badge\">?</span>
+													  <div class=\"tooltip\">
+													    <p>utilizar minimo 7 caracteres y maximo 11 caracteres para definir la clave.</p>
+													  </div>
+												</div>
 												<input type=\"password\" name=\"clave-confirmation\" placeholder=\"Confirmar clave:\" required>
 												<input type=\"submit\" value=\"Crear cuenta\">
 											</form>
