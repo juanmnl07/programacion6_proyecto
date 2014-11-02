@@ -73,22 +73,36 @@ function createUserSession($id_usuario){
 
 }
 
-function closeSession($id_usuario){
+function dbCloseSession($user_name){
 	//abrimos la conexion con la bd para escribir
 	$conn = openConnection();
 
-	$insert_query = "INSERT INTO sesion (sesion,fecha) VALUES ('0','" . time() . ")";
+	//debemos extraer el nombre del usuario pormedio del id
+	$getUsernameQuery = "SELECT id FROM usuarios WHERE nombre_usuario = '$user_name'";
+	$last_row = mysqli_query($conn,$getUsernameQuery);
+	$user_id = 0;
+
+	
+	while($row = mysqli_fetch_array($last_row)) {
+	  $user_id = $row['id'];
+	}
+
+	$insert_query = "INSERT INTO sesion (sesion,fecha,id_usuario) VALUES (0," . time() . ",". $user_id . ")";
 
 	if (!mysqli_query($conn,$insert_query)) {
+		print_r(mysqli_error($conn));
   		exit();
 	}
+
 
 	//cerramos la conexion
 	closeConnection($conn);
 
+	return "la sesion se ha cerrado satisfactoriamente";
+
 }
 
-function openSession($user_name){
+function dbOpenSession($user_name){
 	//abrimos la conexion con la bd para escribir
 	$conn = openConnection();
 
@@ -96,6 +110,11 @@ function openSession($user_name){
 	$user_id = 0;
 	$fecha_ultima_sesion = 0;
 	$nombre_completo = "";
+	$apellido = "";
+	$fecha_nacimiento = "";
+	$nombre_usuario = "";
+	$correo_electronico = "";
+	$clave = "";
 	$estatus = 0;
 
 	//buscamos el id del usuario teniendo a disposicion el nombre del usuario
@@ -123,11 +142,16 @@ function openSession($user_name){
 
 		//similar al paso anterior, obtenemos los datos personales del usuario para mostrarlo en su pagina proncipal
 
-		$nombre_completo_usuario_row = "SELECT nombre_completo, apellidos FROM usuarios WHERE id = $user_id";
+		$nombre_completo_usuario_row = "SELECT nombre_completo, apellidos, fecha_nacimiento, correo_electronico, nombre_usuario, clave FROM usuarios WHERE id = $user_id";
 		$last_row = mysqli_query($conn,$nombre_completo_usuario_row);
 
 		while($current_row = mysqli_fetch_array($last_row)) {
-		  $nombre_completo = $current_row['nombre_completo']. " " . $current_row['apellidos'];
+		  $nombre_completo = $current_row['nombre_completo'];
+		  $apellido = $current_row['apellidos'];
+		  $fecha_nacimiento = $current_row['fecha_nacimiento'];
+		  $nombre_usuario = $current_row['nombre_usuario'];
+		  $correo_electronico = $current_row['correo_electronico'];
+		  $clave = $current_row['clave'];
 		}
 
 		//creamos una sesion nueva
@@ -145,6 +169,11 @@ function openSession($user_name){
 	return array(
 			'estatus' => $estatus,
 			'nombre_completo' => $nombre_completo,
+			'apellido' => $apellido,
+			'fecha_nacimiento' => $fecha_nacimiento,
+		    'nombre_usuario' => $nombre_usuario,
+		  	'correo_electronico' => $correo_electronico,
+		  	'clave' => $clave,
 			'fecha' => $fecha_ultima_sesion
 		);
 

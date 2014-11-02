@@ -39,7 +39,11 @@
 	          </button>
 	        </div>
 	      </div>
-	      <a href="/public/home/register" class="sign-up">Sign Up</a><a href="/public/home/login" class="sign-in">Log in</a>
+	      {% if not userlogged %}
+	      	{% include 'user_not_logged.html' %}
+	      {% else %}
+	      	{% include 'user_logged.html' %}
+	      {% endif %}
 	    </div>
 	  </div>
 	</header>

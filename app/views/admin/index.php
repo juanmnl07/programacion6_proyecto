@@ -12,9 +12,9 @@
 	
 		//verificamos si el usuario ingreso por medio del formulario de inicio de sesio o por medio del registro
 		if(isset($data['session'])){
-			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session']), 'title' => 'Dashboard'));
+			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session']), 'title' => 'Dashboard', 'userlogged' => true));
 		}else {
-			echo $template->render(array('content' => obtenerContenidoUsuarioRegistro(), 'title' => 'Dashboard','mensaje'=>$data['resultado']));
+			echo $template->render(array('content' => obtenerContenidoUsuarioRegistro(), 'title' => 'Dashboard','mensaje'=>$data['resultado'], 'userlogged' => false));
 		}
 
 	}?>
@@ -22,7 +22,7 @@
 <?php
 	//Generar formulario
 	function obtenerContenidoUsuarioSesion($user_info) {
-		return array("markup" => "<div id=\"user-info\"><div id=\"presonal-information\"><label>Nombre completo: " .$user_info['nombre_completo']."</label><label>Dia y hora de la ultima sesion: ".$user_info['fecha']."</label></div></div>");
+		return array("markup" => "<div id=\"user-info\"><div id=\"presonal-information\"><label>Nombre completo: " .$user_info['nombre_usuario']."</label><label>Dia y hora de la ultima sesion: "."</label></div></div>");
 
 	}
 
