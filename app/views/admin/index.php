@@ -33,7 +33,6 @@
 								</nav>');
 }
 
-
 	//Generar formulario
 	function obtenerContenidoUsuarioSesion($user_info) {
 		return array("markup" => '<div class="js-menu-screen menu-screen"></div>
