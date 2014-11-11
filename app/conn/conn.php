@@ -117,19 +117,21 @@ function dbOpenSession($user_name){
 	$clave = "";
 	$estatus = 0;
 
+
 	//buscamos el id del usuario teniendo a disposicion el nombre del usuario
-	$nombre_usuario = "SELECT id FROM usuarios WHERE nombre_usuario = '$user_name'";
+	$nombre_usuario = "SELECT id FROM usuarios WHERE nombre_usuario = '".$user_name."'";
 	$row = mysqli_query($conn,$nombre_usuario);
+
 
 	//tomamos una variable para almacenar el id del usuario
 	//primero verificamos si el usuario esta registrado
-	if($row != ""){
-
+	if($row->num_rows != 0){
 		$estatus = 1;
 
 		while($current_row = mysqli_fetch_array($row)) {
 		  $user_id = $current_row['id'];
 		}
+
 
 		//por medio del id del usuario obtenemos la fecha de la sesion del usuario
 
@@ -162,11 +164,8 @@ function dbOpenSession($user_name){
 	  		exit();
 		}
 
-	}
-	//cerramos la conexion
-	closeConnection($conn);
-	//retornamos los datos del usuario y la ultima fecha y hora en que inicio sesion
-	return array(
+		//retornamos los datos del usuario y la ultima fecha y hora en que inicio sesion
+		return array(
 			'estatus' => $estatus,
 			'nombre_completo' => $nombre_completo,
 			'apellido' => $apellido,
@@ -177,5 +176,23 @@ function dbOpenSession($user_name){
 			'fecha' => $fecha_ultima_sesion
 		);
 
+
+	} else {
+
+		return array(
+			'estatus' => "",
+			'nombre_completo' => "",
+			'apellido' => "",
+			'fecha_nacimiento' => "",
+		    'nombre_usuario' => "",
+		  	'correo_electronico' => "",
+		  	'clave' => "",
+			'fecha' => ""
+		);
+
+	}
+	//cerramos la conexion
+	closeConnection($conn);
+	
 
 }

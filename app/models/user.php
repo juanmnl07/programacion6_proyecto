@@ -26,7 +26,23 @@ class User {
 	}
 
 	function getNameUser(){
+		return $this->nombre_usuario;
+	}
+
+	function getFullName(){
 		return $this->nombre;
+	}
+
+	function getApellido(){
+		return $this->apellido;
+	}
+
+	function getFechaNacimiento(){
+		return $this->fecha_nacimiento;
+	}
+
+	function getCorreoElectronico(){
+		return $this->correo_electronico;
 	}
 
 	function saveUser(){

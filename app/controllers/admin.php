@@ -21,10 +21,10 @@ class Admin extends Controller
 		//si el usuario ha iniciado sesion
 		if(isset($_POST['user-name'])) {
 			$user->openSession($_POST['user-name']);
-			if($user->getNameUser() != ""){
-				$this->view('admin/index', ['session' => array("nombre_usuario" => $user->getNameUser())]);
+			if($user->getFullName() != ""){
+				$this->view('admin/index', ['session' => array("nombre_completo" => $user->getFullName(), "apellido" => $user->getApellido(),"fecha_nacimiento" => $user->getFechaNacimiento(), "correo_electronico" => $user->getCorreoElectronico())]);
 			}else{
-				$this->view('admin/index', ['resultado' => array("mensaje" => "No existen registros asociados a esta cuenta, por favor verifica")]);
+				$this->view('admin/index', ['resultado' => array("mensaje" => "No existen registros asociados a esta cuenta, por favor verifica, seras redireccionado al formulario de inicio de sesion.")]);
 			}
 		}
 	}

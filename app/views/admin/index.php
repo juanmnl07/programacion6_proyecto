@@ -30,20 +30,28 @@
 								    <li><a href="javascript:void(0)">Item 2</a></li>
 								    <li><a href="javascript:void(0)">Item 3</a></li>
 								  </ul>
-								</nav>';
+								</nav>');
+}
 
 
 	//Generar formulario
 	function obtenerContenidoUsuarioSesion($user_info) {
-		return array("markup" => '<div id=\"user-info\"><div id=\"presonal-information\"><label>Nombre completo: ' .$user_info['nombre_usuario'].'</label><label>Dia y hora de la ultima sesion: "."</label></div></div>");
-								<div class="js-menu-screen menu-screen"></div>
+		return array("markup" => '<div class="js-menu-screen menu-screen"></div>
 
 								<ul class="accordion-tabs-minimal">
 									  <li class="tab-header-and-content">
 									    <a href="#" class="tab-link is-active">Datos Personales</a>
-									    <div class="tab-content">
-									    <h4>Datos Personales</h4>
-									      <div id=\"user-info\"><div id=\"presonal-information\"><label>Nombre completo: ' .$user_info['nombre_completo']."</label><label>Dia y hora de la ultima sesion: ".$user_info['fecha'].'</label></div></div>
+										    <div class="tab-content">
+											    <h4>Datos Personales</h4>
+											    <div id="user-info"><div id="presonal-information">
+											      	<ul>
+											      		<li><label>Nombre completo: </label><span>' .$user_info['nombre_completo'].'</span><button>Editar</button></li>
+											      		<li><label>Apellido: </label><span>' .$user_info['apellido'].'</span><button>Editar</button><li>
+											      		<li><label>Fecha de nacimiento: </label><span>' .$user_info['fecha_nacimiento'].'</span><button>Editar</button><li>
+											      		<li><label>Correo Electronico: </label><span>' .$user_info['correo_electronico'].'</span><button>Editar</button><li>
+											      	</ul>
+											    </div>
+										    </div>
 									    </div>
 									  </li>
 									  <li class="tab-header-and-content">
