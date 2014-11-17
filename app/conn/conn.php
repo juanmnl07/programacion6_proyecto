@@ -193,6 +193,105 @@ function dbOpenSession($user_name){
 	}
 	//cerramos la conexion
 	closeConnection($conn);
-	
 
+}
+
+function writeCabana($valores = array()){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$insert_query = "INSERT INTO cabana (id,capacidad_adulotos,capacidad_ninos,tamano,aire_acondicionado,calefaccion,descripcion) VALUES ('" . $valores[0] . "'," . $valores[1] . "," . $valores[2] . ",'" . $valores[3] . "','" . $valores[4] . "','" . $valores[5] . "','" . $valores[6]."')";
+
+	if (!mysqli_query($conn,$insert_query)) {
+  		return array(
+  				'estatus'=>0,
+  				'mensaje'=>mysqli_error($conn)
+  			);
+  		exit();
+	}
+
+	//cerramos la conexion
+	closeConnection($conn);
+
+	return "se ha agregado la cabana satisfactoriamente";
+}
+
+function getAllCabanas(){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$query = "SELECT id, capacidad_adulotos, capacidad_ninos, tamano, aire_acondicionado, calefaccion, descripcion FROM cabana";
+		$rows = mysqli_query($conn,$query);
+		$row = 0;
+		$array = array();
+
+		while($current_row = mysqli_fetch_array($rows)) {
+		  $array[$row] = array(
+		  	'id' => $current_row['id'],
+		  	'capacidad_adulotos' => $current_row['capacidad_adulotos'],
+		  	'capacidad_ninos' => $current_row['capacidad_ninos'],
+		  	'tamano' => $current_row['tamano'],
+		  	'aire_acondicionado' => $current_row['aire_acondicionado'],
+		  	'calefaccion' => $current_row['calefaccion'],
+		  	'descripcion' => $current_row['descripcion']
+		  );
+		  $row = $row + 1;
+		}
+
+	//cerramos la conexion
+	closeConnection($conn);
+
+		return $array;
+}
+
+function writePackage($valores = array()){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$insert_query = "INSERT INTO paquete_reserva (cod_cabana,fecha_ingreso,fecha_salida,estado) VALUES ('" . $valores[1] . "'," . $valores[3] . ",'" . $valores[4] . "','" . $valores[5] ."')";
+
+	if (!mysqli_query($conn,$insert_query)) {
+  		return array(
+  				'estatus'=>0,
+  				'mensaje'=>mysqli_error($conn)
+  			);
+  		exit();
+	}
+
+	//cerramos la conexion
+	closeConnection($conn);
+
+	return "se ha agregado el paquete satisfactoriamente";
+}
+
+function getAllPackages(){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$query = "SELECT id_paquete_reserva,id_usuario_cliente,fecha_ingreso,fecha_salida,estado,cod_cabana FROM paquete_reserva";
+		$rows = mysqli_query($conn,$query);
+		$row = 0;
+		$array[0] = array(
+			  	'id' => "",
+			  	'id_usuario_cliente' => "",
+			  	'fecha_ingreso' => "",
+			  	'fecha_salida' => "",
+			  	'estado' => "",
+			  	'cod_cabana' => "",
+			  );
+
+			while($current_row = mysqli_fetch_array($rows)) {
+			  $array[$row] = array(
+			  	'id' => $current_row['id_paquete_reserva'],
+			  	'id_usuario_cliente' => $current_row['id_usuario_cliente'],
+			  	'fecha_ingreso' => $current_row['fecha_ingreso'],
+			  	'fecha_salida' => $current_row['fecha_salida'],
+			  	'estado' => $current_row['estado'],
+			  	'cod_cabana' => $current_row['cod_cabana'],
+			  );
+			  $row = $row + 1;
+			}
+			//cerramos la conexion
+			closeConnection($conn);
+			return $array;
 }

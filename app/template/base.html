@@ -1,4 +1,4 @@
-<!DOCUMENT HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<!-- META -->
@@ -12,12 +12,20 @@
 	<link rel="stylesheet" type="text/css" href="../../../app/css/layout.css">
 	<link rel="stylesheet" type="text/css" href="../../../app/css/base.css">
 	<link rel="stylesheet" type="text/css" href="../../../app/css/typography.css">
+
+	<!-- Generic page styles -->
+
 	<title>{{ title }} | Booking system</title>
 </head>
 <body>
 	<section id="header">{% include 'header.html' %}</section>
+	<section id="content-wrapper">{% include 'overcontent.html' %}</section>
 	<section id="content-wrapper">{% include 'contenido.html' %}</section>
+	<section id="content-wrapper">{% include 'belowcontent.html' %}</section>
 	<section id="footer">{% include 'footer.html' %}</section>
 	<section id="chat">{% include 'chat.html' %}</section>
+
+	<!-- scripts-->
+
 </body>
 </html>

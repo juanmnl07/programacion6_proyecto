@@ -22,7 +22,21 @@ class Admin extends Controller
 		if(isset($_POST['user-name'])) {
 			$user->openSession($_POST['user-name']);
 			if($user->getFullName() != ""){
-				$this->view('admin/index', ['session' => array("nombre_completo" => $user->getFullName(), "apellido" => $user->getApellido(),"fecha_nacimiento" => $user->getFechaNacimiento(), "correo_electronico" => $user->getCorreoElectronico())]);
+				//si el usuario es administrador, se debe de extrarer toda la informacion de las cabanas
+				$cabana = $this->model('cabana');
+				$cabanas = $cabana->obtenerTodasLasCabanas();
+
+				//obtener todos los registros de los paquetes
+				$paquete = $this->model('paquete');
+				$paquetes = $paquete->obtenerTodasLosPaquetes();
+
+				$this->view('admin/index', ['session' => array(
+					"nombre_completo" => $user->getFullName(), 
+					"apellido" => $user->getApellido(),
+					"fecha_nacimiento" => $user->getFechaNacimiento(), 
+					"correo_electronico" => $user->getCorreoElectronico()), 
+					"registro_cabanas" => $cabanas,
+					"registro_paquetes" => $paquetes]);
 			}else{
 				$this->view('admin/index', ['resultado' => array("mensaje" => "No existen registros asociados a esta cuenta, por favor verifica, seras redireccionado al formulario de inicio de sesion.")]);
 			}
@@ -39,6 +53,20 @@ class Admin extends Controller
 		$CloseSession = $user->closeSession('juanmnl07');
 		$this->view('admin/logout', ['closeSession' => $CloseSession]);
 
+	}
+
+	public function agregar_cabana()
+	{
+		$cabana = $this->model('cabana');
+		$cabana->setCabana($_POST['cod'],$_POST['cap_adultos'],$_POST['cap_ninos'],$_POST['tam'],$_POST['aire_acond'],$_POST['calef'],$_POST['desc']);
+		print_r($cabana->saveCabana());
+	}
+
+	public function agregar_paquete()
+	{
+		$paquete = $this->model('paquete');
+		$paquete->setPaquete($_POST['codigo_cabana'], $_POST['fecha_ing'],$_POST['fecha_sal'],$_POST['est']);
+		print_r($paquete->savePaquete());
 	}
 
 }

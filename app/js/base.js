@@ -73,5 +73,69 @@ $(document).ready(function() {
     }
   });
 
+//handler formulario mantenimiento de cabanas
+  $("#agregar-cabana").submit(function(event){
+    event.preventDefault();
 
-});
+    var codigo = event.target[0]['value'];
+    var capacidad_adultos = event.target[1]['value'];
+    var capacidad_ninos = event.target[2]['value'];
+
+    //verificar los datos del tamano
+    if(event.target[3]['checked'] == true){
+      var tamano = event.target[3]['value'];
+    }     
+    
+    if(event.target[4]['checked'] == true){
+      var tamano = event.target[4]['value'];
+    }
+
+    if(event.target[5]['checked'] == true){
+      var tamano = event.target[5]['value'];
+    } 
+
+    if(event.target[6]['checked'] == true){
+      var aire_acondicionado = event.target[6]['value'];
+    } 
+
+    if(event.target[7]['checked'] == true){
+      var aire_acondicionado = event.target[7]['value'];
+    } 
+
+    if(event.target[8]['checked'] == true){
+      var calefaccion = event.target[8]['value'];
+    } 
+
+    if(event.target[9]['checked'] == true){
+      var calefaccion = event.target[9]['value'];
+    } 
+
+    var descripcion = event.target[10]['value'];
+    var file = event.target[11]['value'];
+
+    $.post( "agregar_cabana", { cod: codigo, cap_adultos: capacidad_adultos, cap_ninos: capacidad_ninos, tam: tamano, aire_acond: aire_acondicionado, calef:calefaccion, desc: descripcion})
+      .done(function( data ) {
+      alert( "Mensaje: " + data );
+    });
+
+  });
+
+  //handler formulario mantenimiento de paquetes
+  $("#agregar-paquete").submit(function(event){
+    event.preventDefault();
+
+    console.log(event);
+
+    var cod_cabana = event.target[0]['value'];
+    var fecha_ingreso = event.target[1]['value'];
+    var fecha_salida = event.target[2]['value'];
+    var estado = event.target[3]['value'];
+
+    $.post( "agregar_paquete", { codigo_cabana: cod_cabana, fecha_ing: fecha_ingreso, fecha_sal: fecha_salida, est: estado})
+      .done(function( data ) {
+      alert( "Mensaje: " + data );
+    });
+
+  });
+
+}); 

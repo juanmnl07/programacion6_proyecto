@@ -334,7 +334,7 @@ header.navigation {
     }
   }
 
-  a.sign-up, a.sign-in {
+  a.sign-up, a.sign-in, a.log-out {
     margin-top: 1.2em;
     margin-left: 0.3em;
     float: right;
@@ -1414,3 +1414,242 @@ h4 {
 .chat-name {
   outline: none;
 }
+
+
+//productos tabla
+.table-borders {
+  $table-border-color: $base-border-color;
+  $table-border: 1px solid $table-border-color;
+  $table-background: lighten($table-border-color, 10);
+  $table-header-color: lighten($table-background, 10);
+  $table-hover-color: darken($table-background, 5);
+  $table-stripe-color: darken($table-background, 4);
+  $table-stripe-color-hover: darken($table-stripe-color, 5);
+  $table-padding: .75em 1em;
+
+  border: $table-border;
+  border-left: 0px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: $base-border-radius;
+
+  tbody {
+    background-color: $table-background;
+    tr:hover > td, tr:hover > th {
+      background-color: $table-hover-color;
+    }
+    tr:nth-child(even) {
+      background-color: $table-stripe-color;
+      &:hover > td {
+        background-color: $table-stripe-color-hover;
+      }
+    }
+  }
+
+  thead:first-of-type {
+    tr:first-child > th:first-child {
+      border-top-left-radius: $base-border-radius;
+    }
+
+    tr:first-child > th:last-child {
+      border-top-right-radius: $base-border-radius;
+    }
+  }
+
+  tbody:last-child {
+    tr:last-child > td:first-child {
+      border-bottom-left-radius: $base-border-radius;
+    }
+
+    tr:last-child > td:last-child {
+      border-bottom-right-radius: $base-border-radius;
+    }
+  }
+
+  thead {
+    th {
+      background-color: $table-header-color;
+      padding: $table-padding;
+      border-left: 1px solid $table-border-color;
+      border-bottom: 0px;
+    }
+  }
+
+  tbody {
+    background-color: $table-background;
+
+    td {
+      padding: $table-padding;
+      border-left: 1px solid $table-border-color;
+      border-top: 1px solid $table-border-color;
+      border-bottom: 0px;
+
+      button {
+        padding: .5em 1em .6em;
+        font-size: .7em;
+        margin-right: 0.5em;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: .3em;
+        outline: none;
+
+        @include media($medium-screen) {
+          width: auto;
+          margin-bottom: 0;
+        }
+
+        @include media($large-screen) {
+          font-size: .8em;
+        }
+      }
+    }
+  }
+}
+
+
+//hero
+
+.hero {
+  $hero-background-top: #7F99BE; 
+  $hero-background-bottom: #20392B;
+  $hero-color: white;
+  $gradient-angle: 10deg;
+  $hero-image: 'https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png';
+
+  @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  padding-bottom: 4em;
+
+  .hero-logo img {
+    height: 3em;
+    margin-bottom: 2.5em;
+  }
+
+  .hero-inner {
+    @include outer-container;
+    @include clearfix;
+    padding: 3em;
+    margin: auto;
+    text-align: center;
+    color: $hero-color;
+
+    .hero-copy {
+      text-align: center;
+      
+      h1 {
+        font-size: 1.6em;
+        margin-bottom: .5em;
+
+        @include media($large-screen) {
+          font-size: 1.8em;
+        }
+      }
+
+      p {
+        font-family: $serif;
+        margin: auto;
+        margin-bottom: 3em; 
+        font-weight: 200;
+        line-height: 1.4em;
+
+        @include media($large-screen) {
+          font-size: 1.1em;
+          max-width: 40%;
+        }
+      }
+    }
+  }
+}
+
+
+//islas
+@mixin grid-item-columns($columns) {
+  width: (100% / 12) * $columns;
+}
+
+.grid-items-lines {
+  $grid-items-background: $base-background-color;
+  $grid-item-background: $base-background-color;
+  $grid-item-border: 1px solid transparentize($base-font-color, .8); 
+  $grid-item-columns: 4;
+  $grid-item-big-columns: 8;
+  $grid-item-color: $base-font-color;
+  $grid-item-height: 14em;
+
+  @include clearfix;
+  position: relative;
+    
+  .grid-item {
+    @include transition (all 0.2s ease-in-out);
+    height: $grid-item-height;
+    background: $grid-item-background;
+    width: 100%;
+    overflow: hidden;
+    float: left;
+    padding: 2em;
+    border-right: $grid-item-border;
+    border-bottom: $grid-item-border;
+    cursor: pointer;
+
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-columns);
+    }
+
+    &:hover {
+      background: transparentize($grid-item-color, .95);
+    }
+  }
+
+  .grid-item img {
+      display: block;
+      height: 2.5em;
+      margin-bottom: 1.2em;
+      opacity: .2;
+    }
+
+  .grid-item h1 {
+      color: $grid-item-color;
+      font-size: 1.3em;
+      margin-bottom: .4em;
+    }
+
+  .grid-item p {
+      color: transparentize($grid-item-color, .4);
+      @include media($medium-screen) {
+        max-width: 70%;
+      }
+    }
+
+  .grid-item-big {
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-big-columns);
+    }
+    p {
+      @include media($medium-screen) {
+        max-width: 60%;
+      }  
+    }
+  }
+
+  // this, below, might not be the most beautiful solution but it removes the outer borders by using the background color.
+  .bottom-cover {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 3px;
+    background: $grid-items-background;
+  }
+
+  .right-cover {
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    width: 4px;
+    background: $grid-items-background;
+  }
+}
+
+  
