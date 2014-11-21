@@ -115,8 +115,13 @@ $(document).ready(function() {
 
     $.post( "agregar_cabana", { cod: codigo, cap_adultos: capacidad_adultos, cap_ninos: capacidad_ninos, tam: tamano, aire_acond: aire_acondicionado, calef:calefaccion, desc: descripcion})
       .done(function( data ) {
-      alert( "Mensaje: " + data );
-    });
+      var datajson = JSON.parse(data);
+      alert( "Mensaje: " + datajson.mensaje );
+
+      //agregamos el regisro en el listado de la tabla
+      $("table#registro-cabanas").append('<tr id="paquete-cod-'+datajson.cod+'"><td class="cod-paquete">'+datajson.cod+'</td><td><button id="'+datajson.cod+'" class="modificar-paquete">modificar</button><button id="'+datajson.cod+'" class="eliminar-paquete">Eliminar</button></td></tr>');
+
+      });
 
   });
 
@@ -124,18 +129,46 @@ $(document).ready(function() {
   $("#agregar-paquete").submit(function(event){
     event.preventDefault();
 
-    console.log(event);
-
     var cod_cabana = event.target[0]['value'];
     var fecha_ingreso = event.target[1]['value'];
     var fecha_salida = event.target[2]['value'];
     var estado = event.target[3]['value'];
+    var costo = event.target[4]['value'];
 
-    $.post( "agregar_paquete", { codigo_cabana: cod_cabana, fecha_ing: fecha_ingreso, fecha_sal: fecha_salida, est: estado})
+        console.log(costo);
+
+    $.post( "agregar_paquete", { codigo_cabana: cod_cabana, fecha_ing: fecha_ingreso, fecha_sal: fecha_salida, est: estado, id_costo: costo})
       .done(function( data ) {
-      alert( "Mensaje: " + data );
+      alert( "Mensaje: " + data.mensaje);
     });
 
+  });
+
+  //handler para cuando el usuario seleccina la opcion de eliminar registros
+  //cabana
+  $(".eliminar-cabana").click(function(){
+    var cod_cabana = $(this).attr("id");
+    $.post( "eliminar_cabana", { cod: cod_cabana})
+      .done(function( data ) {
+      alert( "Mensaje: " + data );
+
+      //eliminamos el elemento dentro del listado
+      $('#cabana-cod-'+cod_cabana).fadeOut(300, function(){ $(this).remove();});
+
+    });
+  });
+
+  //paquete
+  $(".eliminar-paquete").click(function(){
+    var cod_paquete = $(this).attr("id");
+    $.post( "eliminar_paquete", { cod: cod_paquete})
+      .done(function( data ) {
+      alert( "Mensaje: " + data );
+
+      //eliminamos el elemento dentro del listado
+      $('#paquete-cod-'+cod_paquete).fadeOut(300, function(){ $(this).remove();});
+
+    });
   });
 
 }); 

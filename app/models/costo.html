@@ -10,18 +10,16 @@ class Paquete {
 	 private $fecha_ingreso = "";
 	 private $fecha_salida = "";
 	 private $estado = "";
-	 private $id_costo = "";
 
 	 function __construct(){
 
 	 }
 
-	function setPaquete($id_cabana = '', $fecha_ingreso = '', $fecha_salida = '', $estado = '', $id_costo){
+	function setPaquete($id_cabana = '', $fecha_ingreso = '', $fecha_salida = '', $estado = ''){
 		$this->id_cabana = $id_cabana;
 		$this->fecha_ingreso = $fecha_ingreso;
 		$this->fecha_salida = $fecha_salida;
 		$this->estado = $estado;
-		$this->id_costo = $id_costo;
 	}
 
 	function getId(){
@@ -52,16 +50,8 @@ class Paquete {
 		return $this->estado;
 	}
 
-	function getIdCosto(){
-		return $this->id_costo;
-	}
-
-	function getCosto($id_costo){
-		return getCost($id_costo);
-	}
-
 	function savePaquete(){
-		return writePackage(array($this->id, $this->id_cabana, $this->id_usuario_cliente, $this->fecha_ingreso, $this->fecha_salida, $this->estado, $this->id_costo));
+		return writePackage(array($this->id, $this->id_cabana, $this->id_usuario_cliente, $this->fecha_ingreso, $this->fecha_salida, $this->estado));
 	}
 
 	function delPaquete(){
@@ -81,15 +71,13 @@ class Paquete {
 		$this->estado = $array['estado'];
 		$this->id = $array['id'];
 		$this->id_usuario_cliente = $array['id_usuario_cliente'];
-		$this->id_costo = $array['id_costo'];
 		
 		return array("id" => $this->id, 
 					 "id_cabana" => $this->id_cabana,
 					 "id_usuario_cliente" => $this->id_usuario_cliente,
 					 "fecha_ingreso" => $this->fecha_ingreso, 
 					 "fecha_salida" => $this->fecha_salida, 
-					 "estado" => $this->estado, 
-					 "id_costo" => $this->id_costo);
+					 "estado" => $this->estado);
 	}
 
 	function __destruct(){

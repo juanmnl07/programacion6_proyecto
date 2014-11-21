@@ -30,6 +30,10 @@ class Cabana {
 		return $this->codigo;
 	}
 
+	function setCod($cod){
+		$this->codigo = $cod;
+	}
+
 	function getCapacidadAdultos(){
 		return $this->capacidad_adultos;
 	}
@@ -56,6 +60,10 @@ class Cabana {
 
 	function saveCabana(){
 		return writeCabana(array($this->codigo, $this->capacidad_adultos, $this->capacidad_ninos, $this->tamano, $this->aire_acondicionado, $this->calefaccion, $this->descripcion));
+	}
+
+	function delCabana(){
+		return removeCabana($this->codigo);
 	}
 
 	function obtenerTodasLasCabanas(){

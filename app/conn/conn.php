@@ -213,7 +213,27 @@ function writeCabana($valores = array()){
 	//cerramos la conexion
 	closeConnection($conn);
 
-	return "se ha agregado la cabana satisfactoriamente";
+	return '{"cod" : "'.$valores[0].'", "mensaje" : "se ha agregado la cabana satisfactoriamente"}';
+}
+
+function removeCabana($cod){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$insert_query = "DELETE FROM cabana WHERE id = '$cod'";
+
+	if (!mysqli_query($conn,$insert_query)) {
+  		return array(
+  				'estatus'=>0,
+  				'mensaje'=>mysqli_error($conn)
+  			);
+  		exit();
+	}
+
+	//cerramos la conexion
+	closeConnection($conn);
+
+	return "se ha borrado la cabana satisfactoriamente";
 }
 
 function getAllCabanas(){
@@ -248,7 +268,7 @@ function writePackage($valores = array()){
 	//abrimos la conexion con la bd para escribir
 	$conn = openConnection();
 
-	$insert_query = "INSERT INTO paquete_reserva (cod_cabana,fecha_ingreso,fecha_salida,estado) VALUES ('" . $valores[1] . "'," . $valores[3] . ",'" . $valores[4] . "','" . $valores[5] ."')";
+	$insert_query = "INSERT INTO paquete_reserva (cod_cabana,fecha_ingreso,fecha_salida,estado,id_costo) VALUES ('" . $valores[1] . "'," . $valores[3] . ",'" . $valores[4] . "','" . $valores[5] ."'," . $valores[6] .")";
 
 	if (!mysqli_query($conn,$insert_query)) {
   		return array(
@@ -261,7 +281,27 @@ function writePackage($valores = array()){
 	//cerramos la conexion
 	closeConnection($conn);
 
-	return "se ha agregado el paquete satisfactoriamente";
+	return '{"cod" : "1", "mensaje" : "se ha agregado el paquete satisfactoriamente"}';
+}
+
+function removePackage($id){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$insert_query = "DELETE FROM paquete_reserva WHERE id_paquete_reserva = $id";
+
+	if (!mysqli_query($conn,$insert_query)) {
+  		return array(
+  				'estatus'=>0,
+  				'mensaje'=>mysqli_error($conn)
+  			);
+  		exit();
+	}
+
+	//cerramos la conexion
+	closeConnection($conn);
+
+	return "se ha borrado la cabana satisfactoriamente";
 }
 
 function getAllPackages(){
@@ -288,6 +328,109 @@ function getAllPackages(){
 			  	'fecha_salida' => $current_row['fecha_salida'],
 			  	'estado' => $current_row['estado'],
 			  	'cod_cabana' => $current_row['cod_cabana'],
+			  );
+			  $row = $row + 1;
+			}
+			//cerramos la conexion
+			closeConnection($conn);
+			return $array;
+}
+
+function getPackage($id){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$query = "SELECT id_paquete_reserva,id_usuario_cliente,fecha_ingreso,fecha_salida,estado,cod_cabana,id_costo  FROM paquete_reserva WHERE id_paquete_reserva = $id";
+		$rows = mysqli_query($conn,$query);
+		$row = 0;
+		$array = array(
+			  	'id' => "",
+			  	'id_usuario_cliente' => "",
+			  	'fecha_ingreso' => "",
+			  	'fecha_salida' => "",
+			  	'estado' => "",
+			  	'cod_cabana' => "",
+			  	'id_costo' => "",
+			  );
+
+			while($current_row = mysqli_fetch_array($rows)) {
+			  $array = array(
+			  	'id' => $current_row['id_paquete_reserva'],
+			  	'id_usuario_cliente' => $current_row['id_usuario_cliente'],
+			  	'fecha_ingreso' => $current_row['fecha_ingreso'],
+			  	'fecha_salida' => $current_row['fecha_salida'],
+			  	'estado' => $current_row['estado'],
+			  	'cod_cabana' => $current_row['cod_cabana'],
+			  	'id_costo' => $current_row['id_costo'],
+			  );
+			}
+			//cerramos la conexion
+			closeConnection($conn);
+			return $array;
+}
+
+
+//obtener un costo determinado
+function getCost($id){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+	$query = "SELECT id, costo FROM costo WHERE id = $id";
+		$rows = mysqli_query($conn,$query);
+		$row = 0;
+		$array = array(
+			  	'id' => "",
+			  	'costo' => ""
+			  );
+			while($current_row = mysqli_fetch_array($rows)) {
+			  $array = array(
+			  	'id' => $current_row['id'],
+			  	'costo' => $current_row['costo'],
+			  );
+			}
+			//cerramos la conexion
+			closeConnection($conn);
+			return $array;
+}
+
+//guardar el costo
+function writeCost($costo){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$insert_query = "INSERT INTO costo (costo) VALUES (" . $costo . ")";
+
+	if (!mysqli_query($conn,$insert_query)) {
+  		return array(
+  				'estatus'=>0,
+  				'mensaje'=>mysqli_error($conn)
+  			);
+  		exit();
+	}
+
+	//cerramos la conexion
+	closeConnection($conn);
+
+	return '{"cod" : "1", "mensaje" : "se ha agregado el paquete satisfactoriamente"}';
+}
+
+
+//obtener todos los costos
+function getAllCosts(){
+	//abrimos la conexion con la bd para escribir
+	$conn = openConnection();
+
+	$query = "SELECT id,costo FROM costo";
+		$rows = mysqli_query($conn,$query);
+		$row = 0;
+		$array[0] = array(
+			  	'id' => "",
+			  	'costo' => "",
+			  );
+
+			while($current_row = mysqli_fetch_array($rows)) {
+			  $array[$row] = array(
+			  	'id' => $current_row['id'],
+			  	'costo' => $current_row['costo'],
 			  );
 			  $row = $row + 1;
 			}

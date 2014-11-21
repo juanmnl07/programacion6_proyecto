@@ -12,7 +12,7 @@
 	
 		//verificamos si el usuario ingreso por medio del formulario de inicio de sesio o por medio del registro
 		if(isset($data['session'])){
-			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session'], $data['registro_cabanas'], $data['registro_paquetes']), 'title' => 'Dashboard', 'userlogged' => true));
+			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session'], $data['registro_cabanas'], $data['registro_paquetes'], $data['costos']), 'title' => 'Dashboard', 'userlogged' => true));
 		}else {
 			echo $template->render(array('content' => obtenerContenidoUsuarioRegistro(), 'title' => 'Dashboard','mensaje'=>$data['resultado'], 'userlogged' => false));
 		}
@@ -34,19 +34,24 @@
 }
 
 	//Generar formulario
-	function obtenerContenidoUsuarioSesion($user_info, $registro_cabanas, $registro_paquetes) {
+	function obtenerContenidoUsuarioSesion($user_info, $registro_cabanas, $registro_paquetes, $costos) {
 
 		$content = "";
 		$content_paquetes = "";
+		$listado_costos = "";
 		$codigos_cabanas = "<select name=\"codigos-cabanas\">";
 
+		//llenar los costos predefinidos
+		for ($i=0; $i < count($costos); $i++) { 
+			$listado_costos .= "<option value=\"".$costos[$i]['id']."\">".$costos[$i]['costo']."</option>";
+
+		}
+
 		for ($i=0; $i < count($registro_cabanas); $i++) { 
-			$content .= "<tbody>
-						    <tr id=\"cabana-cod-".$registro_cabanas[$i]['id']."\">
+			$content .= "<tr id=\"cabana-cod-".$registro_cabanas[$i]['id']."\">
 						      <td class=\"cod-cabana\">".$registro_cabanas[$i]['id']."</td>
-						      <td><button id=\"modificar-cabana-cod-".$registro_cabanas[$i]['id']."\">modificar</button><button id=\"eliminar-cabana-cod-".$registro_cabanas[$i]['id']."\">Eliminar</button></td>
-						    </tr>
-					    </tbody>";
+						      <td><button id=\"".$registro_cabanas[$i]['id']."\" class=\"modificar-cabana\">modificar</button><button id=\"".$registro_cabanas[$i]['id']."\" class=\"eliminar-cabana\">Eliminar</button></td>
+						    </tr>";
 
 			$codigos_cabanas .= "<option value=\"".$registro_cabanas[$i]['id']."\">".$registro_cabanas[$i]['id']."</option>";
 
@@ -57,13 +62,10 @@
 		//regisros de paquetes
 		if(isset($registro_paquetes[0]['id']) && $registro_paquetes[0]['id'] != ""){
 			for ($i=0; $i < count($registro_paquetes); $i++) { 
-				$content_paquetes .= "<tbody>
-							    <tr id=\"cabana-cod-".$registro_paquetes[$i]['id']."\">
-							      <td class=\"cod-cabana\">".$registro_paquetes[$i]['id']."</td>
-							      <td class=\"estado-paquete\">".$registro_paquetes[$i]['estado']."</td>
-							      <td><button id=\"modificar-cabana-cod-".$registro_paquetes[$i]['id']."\">modificar</button><button id=\"eliminar-cabana-cod-".$registro_paquetes[$i]['id']."\">Eliminar</button></td>
-							    </tr>
-						    </tbody>";
+				$content_paquetes .= "<tr id=\"paquete-cod-".$registro_paquetes[$i]['id']."\">
+							      <td class=\"cod-paquete\">".$registro_paquetes[$i]['id']."</td>
+							      <td><button id=\"".$registro_paquetes[$i]['id']."\" class=\"modificar-paquete\">modificar</button><button id=\"".$registro_paquetes[$i]['id']."\" class=\"eliminar-paquete\">Eliminar</button><a class=\"ver-paquete\" href=\"/public/productos/pid/".$registro_paquetes[$i]['id']."\">Ver</button></td>
+							    </tr>";
 			}
 		}
 		
@@ -89,15 +91,17 @@
 									    <a href="#" class="tab-link">Tus Cabañas</a>
 									    <div class="tab-content">
 									      <h4>Registro de cabañas</h4>
-									      <table class="table-borders">
+									      <table class="table-borders" id="registro-cabanas">
 											  <thead>
 											    <tr>
 											      <th>Nombre o código</th>
 											      <th>Opciones</th>
 											    </tr>
-											  </thead>'
+											  </thead>
+											  <tbody>'
 											  	.$content.
-											  '</table>
+											  '</tbody>
+											  </table>
 
 											<h4>Agregar cabaña</h4>
 											<form action="" method="post" id="agregar-cabana">
@@ -150,16 +154,17 @@
 									    <a href="#" class="tab-link">Paquetes</a>
 									    <div class="tab-content">
 									      <h4>Registro de paquetes</h4>
-									      <table class="table-borders">
+									      <table class="table-borders" id="registro_paquetes">
 											  <thead>
 											    <tr>
 											      <th>Código</th>
-											      <th>Estado</th>
 											      <th>Opciones</th>
 											    </tr>
-											  </thead>'
+											  </thead>
+											  <tbody>'
 											  	.$content_paquetes.
-											  '</table>
+											  '</tbody>
+											  </table>
 
 											<h4>Agregar paquetes</h4>
 											<form action="" method="post" id="agregar-paquete">
@@ -174,6 +179,11 @@
 													<option value="c">Cancelado</option>
 													<option value="r">Resevado</option>
 													<option value="p">Pagado</option>
+												</select>
+
+												<label>Costo</label>
+												<select id="costo-paquete" name="costo-paquete">
+												'.$listado_costos.'
 												</select>
 												
 												<input type="submit" value="Agregar paquete">

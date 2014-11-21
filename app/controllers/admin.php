@@ -30,13 +30,18 @@ class Admin extends Controller
 				$paquete = $this->model('paquete');
 				$paquetes = $paquete->obtenerTodasLosPaquetes();
 
+				//obtener todos los precios
+				$costo = $this->model('costo');
+				$costos = $costo->obtenerTodasLosCostos();
+
 				$this->view('admin/index', ['session' => array(
 					"nombre_completo" => $user->getFullName(), 
 					"apellido" => $user->getApellido(),
 					"fecha_nacimiento" => $user->getFechaNacimiento(), 
 					"correo_electronico" => $user->getCorreoElectronico()), 
 					"registro_cabanas" => $cabanas,
-					"registro_paquetes" => $paquetes]);
+					"registro_paquetes" => $paquetes,
+					"costos" => $costos]);
 			}else{
 				$this->view('admin/index', ['resultado' => array("mensaje" => "No existen registros asociados a esta cuenta, por favor verifica, seras redireccionado al formulario de inicio de sesion.")]);
 			}
@@ -62,11 +67,25 @@ class Admin extends Controller
 		print_r($cabana->saveCabana());
 	}
 
+	public function eliminar_cabana()
+	{
+		$cabana = $this->model('cabana');
+		$cabana->setCod($_POST['cod']);
+		print_r($cabana->delCabana());
+	}
+
 	public function agregar_paquete()
 	{
 		$paquete = $this->model('paquete');
-		$paquete->setPaquete($_POST['codigo_cabana'], $_POST['fecha_ing'],$_POST['fecha_sal'],$_POST['est']);
+		$paquete->setPaquete($_POST['codigo_cabana'], $_POST['fecha_ing'],$_POST['fecha_sal'],$_POST['est'], $_POST['id_costo']);
 		print_r($paquete->savePaquete());
+	}
+
+	public function eliminar_paquete()
+	{
+		$paquete = $this->model('paquete');
+		$paquete->setCodPaquete($_POST['cod']);
+		print_r($paquete->delPaquete());
 	}
 
 }
