@@ -480,7 +480,7 @@ header.navigation {
         background: transparent;
         float: right;
         clear: none; } }
-  header.navigation a.sign-up, header.navigation a.sign-in, header.navigation a.log-out {
+  header.navigation a.sign-up, header.navigation a.sign-in, header.navigation a.log-out, header.navigation a.dashboard {
     margin-top: 1.2em;
     margin-left: 0.3em;
     float: right;
@@ -496,9 +496,9 @@ header.navigation {
     text-transform: uppercase;
     padding: .4em .5em; }
     @media screen and (min-width: 53.75em) {
-      header.navigation a.sign-up, header.navigation a.sign-in, header.navigation a.log-out {
+      header.navigation a.sign-up, header.navigation a.sign-in, header.navigation a.log-out, header.navigation a.dashboard {
         padding: .5em 1em; } }
-    header.navigation a.sign-up:hover, header.navigation a.sign-in:hover, header.navigation a.log-out:hover {
+    header.navigation a.sign-up:hover, header.navigation a.sign-in:hover, header.navigation a.log-out:hover, header.navigation a.dashboard:hover {
       background: #6f99d5; }
   header.navigation .search-bar {
     padding: .85em .6em;

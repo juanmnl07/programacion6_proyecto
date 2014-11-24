@@ -2,6 +2,9 @@
 /**
 * 
 */
+
+require_once "sesion.php";
+
 class Admin extends Controller
 {
 
@@ -21,7 +24,12 @@ class Admin extends Controller
 		//si el usuario ha iniciado sesion
 		if(isset($_POST['user-name'])) {
 			$user->openSession($_POST['user-name']);
+
 			if($user->getFullName() != ""){
+
+				//crearSesion
+				abrirSesion($user);
+
 				//si el usuario es administrador, se debe de extrarer toda la informacion de las cabanas
 				$cabana = $this->model('cabana');
 				$cabanas = $cabana->obtenerTodasLasCabanas();
@@ -45,6 +53,37 @@ class Admin extends Controller
 			}else{
 				$this->view('admin/index', ['resultado' => array("mensaje" => "No existen registros asociados a esta cuenta, por favor verifica, seras redireccionado al formulario de inicio de sesion.")]);
 			}
+		} else {
+			//si existe una sesion abierta
+			if (obtenerNombreUsuario()) {
+
+				$user->openSession(obtenerNombreUsuario());
+
+				//verificar el tipo de usuario
+				$cabana = $this->model('cabana');
+				$cabanas = $cabana->obtenerTodasLasCabanas();
+
+				//obtener todos los registros de los paquetes
+				$paquete = $this->model('paquete');
+				$paquetes = $paquete->obtenerTodasLosPaquetes();
+
+				//obtener todos los precios
+				$costo = $this->model('costo');
+				$costos = $costo->obtenerTodasLosCostos();
+
+				$this->view('admin/index', ['session' => array(
+					"nombre_completo" => $user->getFullName(), 
+					"apellido" => $user->getApellido(),
+					"fecha_nacimiento" => $user->getFechaNacimiento(), 
+					"correo_electronico" => $user->getCorreoElectronico()), 
+					"registro_cabanas" => $cabanas,
+					"registro_paquetes" => $paquetes,
+					"costos" => $costos]);
+			} else {
+				//la sesion fue cerrada previamente, se redireccionara al home
+				header('Location: http://www.proyecto_progra6.com/public/home/login');
+
+			}
 		}
 	}
 
@@ -55,7 +94,10 @@ class Admin extends Controller
 		//pendiete
 		$user = $this->model('user');
 		//obtememos el nombre del usuario pormedio de la sesion
-		$CloseSession = $user->closeSession('juanmnl07');
+		$CloseSession = $user->closeSession(obtenerNombreUsuario());
+
+		cerrarSesion();
+
 		$this->view('admin/logout', ['closeSession' => $CloseSession]);
 
 	}
@@ -63,7 +105,16 @@ class Admin extends Controller
 	public function agregar_cabana()
 	{
 		$cabana = $this->model('cabana');
-		$cabana->setCabana($_POST['cod'],$_POST['cap_adultos'],$_POST['cap_ninos'],$_POST['tam'],$_POST['aire_acond'],$_POST['calef'],$_POST['desc']);
+		$filename = $_FILES['files']['name'][0];
+		$file_tmp = $_FILES["files"]["tmp_name"][0];
+		$submit = false;
+
+		if(isset($_POST["submit"])){
+			$submit = true;
+		}
+
+		$cabana->setCabana($_POST['codigo'],$_POST['capacidad-adultos'],$_POST['capacidad-ninos'],$_POST['tamano'],$_POST['aire-acondicionado'],$_POST['calefaccion'],$_POST['descripcion'], $_FILES['files']['name'][0]);
+		$cabana->saveImagePath($filename, $file_tmp, $submit);
 		print_r($cabana->saveCabana());
 	}
 

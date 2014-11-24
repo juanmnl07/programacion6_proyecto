@@ -202,7 +202,17 @@ function writeCabana($valores = array()){
 
 	$insert_query = "INSERT INTO cabana (id,capacidad_adulotos,capacidad_ninos,tamano,aire_acondicionado,calefaccion,descripcion) VALUES ('" . $valores[0] . "'," . $valores[1] . "," . $valores[2] . ",'" . $valores[3] . "','" . $valores[4] . "','" . $valores[5] . "','" . $valores[6]."')";
 
+	$insert_query_arvhivo = "INSERT INTO archivos (nombre_archivo) VALUES ('" . $valores[7]."')";
+
 	if (!mysqli_query($conn,$insert_query)) {
+  		return array(
+  				'estatus'=>0,
+  				'mensaje'=>mysqli_error($conn)
+  			);
+  		exit();
+	}
+
+	if (!mysqli_query($conn,$insert_query_arvhivo)) {
   		return array(
   				'estatus'=>0,
   				'mensaje'=>mysqli_error($conn)
@@ -438,3 +448,5 @@ function getAllCosts(){
 			closeConnection($conn);
 			return $array;
 }
+
+

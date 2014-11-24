@@ -1,5 +1,7 @@
 <?php 		
 
+	require_once '../app/controllers/sesion.php';
+
 	if (file_exists('../vendor/twig/twig/lib/Twig/Autoloader.php')){
 		require_once '../vendor/twig/twig/lib/Twig/Autoloader.php';
 		Twig_Autoloader::register();
@@ -9,7 +11,12 @@
 		$twig = new Twig_Environment($loader);
 
 		$template = $twig->loadTemplate('base.html');
-		echo $template->render(array('content' => obtenerContenido(), 'title' => 'Acerca de Nosotros'));
+
+		if(obtenerNombreUsuario()){
+			echo $template->render(array('content' => obtenerContenido(), 'title' => 'Acerca de Nosotros', 'userlogged' => true));
+		}else {
+			echo $template->render(array('content' => obtenerContenido(), 'title' => 'Acerca de Nosotros', 'userlogged' => false));
+		}
 
 	}
 

@@ -1,5 +1,10 @@
 <?php 		
 
+	//utilizar la sesion
+	require_once '../app/controllers/sesion.php';
+
+	if(!obtenerNombreUsuario()){
+
 	if (file_exists('../vendor/twig/twig/lib/Twig/Autoloader.php')){
 		require_once '../vendor/twig/twig/lib/Twig/Autoloader.php';
 		Twig_Autoloader::register();
@@ -11,6 +16,10 @@
 		$template = $twig->loadTemplate('base.html');
 		echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Index'));
 
+	}
+
+	}else{
+		header('Location: http://www.proyecto_progra6.com/public/admin/index');
 	}
 
 	//Generar formulario

@@ -1,20 +1,28 @@
 <?php 		
 
-	if (file_exists('../vendor/twig/twig/lib/Twig/Autoloader.php')){
-		require_once '../vendor/twig/twig/lib/Twig/Autoloader.php';
-		Twig_Autoloader::register();
+	//utilizar la sesion
+	require_once '../app/controllers/sesion.php';
 
-		$templateDir = array('/var/www/proyecto_progra6/app/template');
-		$loader = new Twig_Loader_Filesystem($templateDir);
-		$twig = new Twig_Environment($loader);
+	if(!obtenerNombreUsuario()){
 
-		$template = $twig->loadTemplate('base.html');
+		if (file_exists('../vendor/twig/twig/lib/Twig/Autoloader.php')){
+			require_once '../vendor/twig/twig/lib/Twig/Autoloader.php';
+			Twig_Autoloader::register();
 
-		
-		echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Registro de usuarios'));
+			$templateDir = array('/var/www/proyecto_progra6/app/template');
+			$loader = new Twig_Loader_Filesystem($templateDir);
+			$twig = new Twig_Environment($loader);
 
+			$template = $twig->loadTemplate('base.html');
 
-	}?>
+			echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Registro de usuarios'));
+
+		}
+	} else {
+		header("Location: http://www.proyecto_progra6.com/public/admin/index");
+	}
+
+	?>
 
 <?php
 	//Generar formulario

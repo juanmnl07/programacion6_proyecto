@@ -1,0 +1,308 @@
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: proyecto_progra6_db
+-- ------------------------------------------------------
+-- Server version	5.5.40-0ubuntu0.14.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `archivos`
+--
+
+DROP TABLE IF EXISTS `archivos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `archivos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_archivo` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `archivos`
+--
+
+LOCK TABLES `archivos` WRITE;
+/*!40000 ALTER TABLE `archivos` DISABLE KEYS */;
+INSERT INTO `archivos` VALUES (1,'foto1.jpg'),(2,'foto1.jpg'),(3,'foto1.jpg'),(4,'foto1.jpg'),(5,'foto1.jpg'),(6,'foto1.jpg'),(7,'foto1.jpg'),(8,'foto1.jpg');
+/*!40000 ALTER TABLE `archivos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cabana`
+--
+
+DROP TABLE IF EXISTS `cabana`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cabana` (
+  `id` varchar(20) NOT NULL,
+  `capacidad_adulotos` int(11) NOT NULL,
+  `capacidad_ninos` int(11) NOT NULL,
+  `tamano` char(1) NOT NULL,
+  `aire_acondicionado` char(1) NOT NULL,
+  `calefaccion` char(1) NOT NULL,
+  `descripcion` varchar(600) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cabana`
+--
+
+LOCK TABLES `cabana` WRITE;
+/*!40000 ALTER TABLE `cabana` DISABLE KEYS */;
+INSERT INTO `cabana` VALUES ('c-1',1,1,'p','s','s','TEST'),('c-10',1,1,'p','s','s','test'),('c-11',1,1,'p','s','s','test'),('c-12',1,1,'m','n','n','Prueba de calidad'),('c-13',1,1,'p','s','s','test'),('c-14',1,1,'p','s','s','test'),('c-15',1,1,'p','s','s','tset'),('c-16',1,1,'p','s','s','tset'),('c-17',2,3,'p','s','s','Tst'),('c-18',1,1,'p','s','s','tst'),('c-19',2,2,'p','s','s','test'),('c-2',1,1,'p','s','s','test'),('c-3',1,1,'p','s','s','test'),('c-4',1,1,'p','s','s','tst'),('c-5',1,1,'p','s','s','test'),('c-6',1,1,'p','s','s','test'),('c-7',1,1,'p','s','s','test'),('c-9',1,1,'p','s','s','test');
+/*!40000 ALTER TABLE `cabana` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `costo`
+--
+
+DROP TABLE IF EXISTS `costo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `costo` (
+  `costo` float NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `costo`
+--
+
+LOCK TABLES `costo` WRITE;
+/*!40000 ALTER TABLE `costo` DISABLE KEYS */;
+INSERT INTO `costo` VALUES (50000,1);
+/*!40000 ALTER TABLE `costo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fectura`
+--
+
+DROP TABLE IF EXISTS `fectura`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fectura` (
+  `id` varchar(20) NOT NULL,
+  `impuestos` float NOT NULL,
+  `id_paquete_reserva` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fectura`
+--
+
+LOCK TABLES `fectura` WRITE;
+/*!40000 ALTER TABLE `fectura` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fectura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `paquete_reserva`
+--
+
+DROP TABLE IF EXISTS `paquete_reserva`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paquete_reserva` (
+  `id_paquete_reserva` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario_cliente` int(11) DEFAULT NULL,
+  `fecha_ingreso` int(11) DEFAULT NULL,
+  `fecha_salida` int(11) DEFAULT NULL,
+  `estado` char(1) DEFAULT NULL,
+  `cod_cabana` varchar(20) DEFAULT NULL,
+  `id_costo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_paquete_reserva`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `paquete_reserva`
+--
+
+LOCK TABLES `paquete_reserva` WRITE;
+/*!40000 ALTER TABLE `paquete_reserva` DISABLE KEYS */;
+INSERT INTO `paquete_reserva` VALUES (7,NULL,0,18,'r','c-1',1);
+/*!40000 ALTER TABLE `paquete_reserva` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `permiso`
+--
+
+DROP TABLE IF EXISTS `permiso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permiso` (
+  `id_rol` int(11) NOT NULL,
+  `id_ruta` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permiso`
+--
+
+LOCK TABLES `permiso` WRITE;
+/*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rol`
+--
+
+DROP TABLE IF EXISTS `rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rol` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `rol` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rol`
+--
+
+LOCK TABLES `rol` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `rol` VALUES (1,'Administra'),(2,'Registrado');
+/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ruta`
+--
+
+DROP TABLE IF EXISTS `ruta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ruta` (
+  `url` varchar(20) NOT NULL,
+  `id_ruta` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_ruta`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ruta`
+--
+
+LOCK TABLES `ruta` WRITE;
+/*!40000 ALTER TABLE `ruta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ruta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sesion`
+--
+
+DROP TABLE IF EXISTS `sesion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sesion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sesion` int(1) NOT NULL,
+  `fecha` int(12) NOT NULL,
+  `id_usuario` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=377 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sesion`
+--
+
+LOCK TABLES `sesion` WRITE;
+/*!40000 ALTER TABLE `sesion` DISABLE KEYS */;
+INSERT INTO `sesion` VALUES (12,1,1413749276,0),(13,1,1413749432,0),(14,1,1413749491,0),(15,1,1413749519,0),(16,1,1413749666,0),(17,1,1413750388,0),(18,1,1413750719,0),(19,1,1413750819,0),(20,1,1413750869,0),(21,1,1413750992,0),(22,1,1413751081,0),(23,1,1413751187,0),(24,1,1413751255,0),(25,1,1413751338,0),(26,1,1414280484,0),(27,1,1414280515,0),(28,1,1414280656,0),(29,1,1414281943,0),(30,1,1414282073,0),(31,1,1414282279,0),(32,1,1414282321,0),(33,1,1414282835,0),(34,1,1414285029,0),(35,0,1414285841,0),(36,1,1414285901,0),(37,0,1414285904,0),(38,1,1414468434,0),(39,1,1414468510,0),(40,1,1414468565,0),(41,1,1414468585,0),(42,1,1414468630,0),(43,0,1414468646,0),(44,1,1414468702,0),(45,0,1414468719,0),(46,1,1414468726,0),(47,1,1414469117,0),(48,0,1414469120,0),(49,1,1414469126,0),(50,0,1414469129,0),(51,1,1414469153,0),(52,0,1414469161,0),(53,1,1414895162,0),(54,1,1414895234,0),(55,1,1414895258,0),(56,1,1414895430,0),(57,0,1414895452,0),(58,1,1414895462,0),(59,1,1414895651,0),(60,1,1414895723,0),(61,1,1414895775,0),(62,1,1414896228,0),(63,0,1414896907,0),(64,1,1414896916,0),(65,1,1414897021,0),(66,0,1414897027,0),(67,1,1414897031,0),(68,1,1414897067,0),(69,0,1414897070,0),(70,1,1414897076,0),(71,1,1414897117,0),(72,1,1414897152,0),(73,1,1414897334,0),(74,0,1414897337,0),(75,1,1414897342,0),(76,1,1414897385,0),(77,1,1414897555,0),(78,0,1414897560,0),(79,1,1414897563,0),(80,0,1414897567,0),(81,1,1414897573,0),(82,0,1414897626,0),(83,1,1414897647,0),(84,1,1414897680,0),(85,0,1414899396,0),(86,1,1414953061,0),(87,1,1414955092,0),(88,1,1414955255,0),(89,1,1414955502,0),(90,1,1414955548,0),(91,1,1414955631,0),(92,1,1414955889,0),(93,1,1414955937,0),(94,1,1414955966,0),(95,1,1414956362,0),(96,1,1414956438,0),(97,1,1414956728,0),(98,1,1414956985,0),(99,1,1414957245,0),(100,1,1414957304,0),(101,1,1414957345,0),(102,1,1414957430,0),(103,0,1414957441,0),(104,1,1414957472,0),(105,1,1414958424,0),(106,1,1414958500,0),(107,0,1415551823,0),(108,1,1415551844,0),(109,1,1415552036,0),(110,1,1415552076,0),(111,1,1415552180,0),(112,1,1415552370,0),(113,1,1415552394,0),(114,1,1415552421,0),(115,1,1415674076,0),(116,1,1415674538,0),(117,1,1415674626,0),(118,1,1415679200,0),(119,1,1415679279,0),(120,1,1415679333,0),(121,1,1415680268,0),(122,1,1416097298,0),(123,1,1416098519,0),(124,1,1416098585,0),(125,1,1416098635,0),(126,1,1416098679,0),(127,1,1416099197,0),(128,1,1416099230,0),(129,1,1416099261,0),(130,1,1416099331,0),(131,1,1416099765,0),(132,1,1416099823,0),(133,1,1416099923,0),(134,1,1416099945,0),(135,1,1416100161,0),(136,1,1416100250,0),(137,1,1416100347,0),(138,1,1416100463,0),(139,1,1416100502,0),(140,1,1416100612,0),(141,0,1416100689,0),(142,1,1416100695,0),(143,1,1416101072,0),(144,1,1416101174,0),(145,1,1416102418,0),(146,1,1416102461,0),(147,1,1416102512,0),(148,1,1416102585,0),(149,1,1416102638,0),(150,1,1416106968,0),(151,1,1416107061,0),(152,1,1416107068,0),(153,1,1416107174,0),(154,1,1416107185,0),(155,1,1416107232,0),(156,1,1416107346,0),(157,1,1416107651,0),(158,1,1416107980,0),(159,1,1416108090,0),(160,1,1416109584,0),(161,1,1416109730,0),(162,1,1416109754,0),(163,1,1416109811,0),(164,1,1416109836,0),(165,1,1416109952,0),(166,1,1416110044,0),(167,1,1416110122,0),(168,1,1416110239,0),(169,1,1416110285,0),(170,1,1416110324,0),(171,1,1416110362,0),(172,1,1416110430,0),(173,1,1416110494,0),(174,1,1416110572,0),(175,1,1416110928,0),(176,1,1416111030,0),(177,1,1416111517,0),(178,1,1416111682,0),(179,1,1416113440,0),(180,1,1416113495,0),(181,1,1416113688,0),(182,1,1416113813,0),(183,1,1416113942,0),(184,1,1416114013,0),(185,1,1416114160,0),(186,1,1416114253,0),(187,1,1416114399,0),(188,1,1416114465,0),(189,0,1416184961,0),(190,1,1416184968,0),(191,0,1416184977,0),(192,0,1416184978,0),(193,1,1416184985,0),(194,1,1416185410,0),(195,1,1416185457,0),(196,1,1416185502,0),(197,1,1416186047,0),(198,1,1416186089,0),(199,1,1416186278,0),(200,1,1416190361,0),(201,1,1416190530,0),(202,1,1416190578,0),(203,1,1416190610,0),(204,1,1416190647,0),(205,1,1416190716,0),(206,1,1416190752,0),(207,1,1416190892,0),(208,1,1416190980,0),(209,1,1416191069,0),(210,1,1416191157,0),(211,1,1416191223,0),(212,1,1416191415,0),(213,1,1416191876,0),(214,1,1416191985,0),(215,1,1416192078,0),(216,1,1416192137,0),(217,1,1416192194,0),(218,1,1416192264,0),(219,1,1416192322,0),(220,1,1416192335,0),(221,0,1416192355,0),(222,1,1416192366,0),(223,1,1416192404,0),(224,1,1416192592,0),(225,1,1416192668,0),(226,1,1416192814,0),(227,1,1416192840,0),(228,1,1416193543,0),(229,1,1416194391,0),(230,1,1416194583,0),(231,1,1416194717,0),(232,1,1416194782,0),(233,1,1416194914,0),(234,1,1416194927,0),(235,1,1416194939,0),(236,1,1416195087,0),(237,1,1416195171,0),(238,1,1416195266,0),(239,1,1416195397,0),(240,1,1416195536,0),(241,1,1416277105,0),(242,1,1416277124,0),(243,1,1416277233,0),(244,1,1416277301,0),(245,1,1416277319,0),(246,1,1416277336,0),(247,1,1416277666,0),(248,1,1416277703,0),(249,1,1416277723,0),(250,1,1416277742,0),(251,1,1416277751,0),(252,1,1416277786,0),(253,1,1416277911,0),(254,1,1416278216,0),(255,1,1416278239,0),(256,1,1416278287,0),(257,1,1416278297,0),(258,1,1416278728,0),(259,1,1416278761,0),(260,1,1416278831,0),(261,1,1416278851,0),(262,1,1416278911,0),(263,1,1416278927,0),(264,1,1416278941,0),(265,1,1416279467,0),(266,1,1416279722,0),(267,1,1416279784,0),(268,1,1416279845,0),(269,1,1416279931,0),(270,1,1416279965,0),(271,1,1416280118,0),(272,1,1416280401,0),(273,1,1416280546,0),(274,1,1416280608,0),(275,1,1416280706,0),(276,1,1416280878,0),(277,1,1416280925,0),(278,1,1416281052,0),(279,1,1416281246,0),(280,1,1416281404,0),(281,1,1416281434,0),(282,0,1416282952,0),(283,1,1416368611,0),(284,1,1416368686,0),(285,1,1416368708,0),(286,1,1416368953,0),(287,1,1416368982,0),(288,1,1416369017,0),(289,1,1416369884,0),(290,1,1416369968,0),(291,1,1416535435,0),(292,1,1416537297,0),(293,1,1416537376,0),(294,1,1416537401,0),(295,1,1416537413,0),(296,1,1416538373,0),(297,1,1416538408,0),(298,1,1416538431,0),(299,1,1416538655,0),(300,1,1416538921,0),(301,1,1416539022,0),(302,1,1416539262,0),(303,1,1416540645,0),(304,1,1416700836,0),(305,1,1416701432,0),(306,1,1416708078,0),(307,1,1416708205,0),(308,1,1416708350,0),(309,1,1416714603,0),(310,1,1416714741,0),(311,1,1416714756,0),(312,1,1416714832,0),(313,1,1416715230,0),(314,1,1416715917,0),(315,1,1416717179,0),(316,1,1416717245,0),(317,1,1416717395,0),(318,1,1416718064,0),(319,1,1416718189,0),(320,1,1416718709,0),(321,1,1416719022,0),(322,1,1416719160,0),(323,1,1416719249,0),(324,1,1416719405,0),(325,1,1416719530,0),(326,1,1416753017,0),(327,1,1416755063,0),(328,1,1416755158,0),(329,1,1416756413,0),(330,1,1416756419,0),(331,0,1416756430,0),(332,1,1416756775,0),(333,1,1416756783,0),(334,0,1416756818,0),(335,1,1416756871,0),(336,1,1416756876,0),(337,1,1416756919,0),(338,0,1416757520,0),(339,1,1416757527,0),(340,1,1416757578,0),(341,1,1416757583,0),(342,1,1416758127,0),(343,1,1416758132,0),(344,1,1416758195,0),(345,0,1416758197,0),(346,1,1416758868,0),(347,1,1416759133,0),(348,1,1416759138,0),(349,1,1416759499,0),(350,1,1416759519,0),(351,1,1416759678,0),(352,1,1416759700,0),(353,0,1416759707,0),(354,1,1416759715,0),(355,0,1416759810,0),(356,1,1416759826,0),(357,1,1416759839,0),(358,0,1416759856,0),(359,1,1416759916,0),(360,0,1416759928,0),(361,1,1416760194,0),(362,1,1416782590,0),(363,1,1416783536,0),(364,0,1416783542,0),(365,1,1416783719,0),(366,1,1416783844,0),(367,1,1416783853,0),(368,1,1416783964,0),(369,1,1416784143,0),(370,1,1416784173,0),(371,1,1416784312,0),(372,1,1416784488,0),(373,1,1416785576,0),(374,1,1416785961,0),(375,1,1416786969,0),(376,1,1416787016,0);
+/*!40000 ALTER TABLE `sesion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transaction`
+--
+
+DROP TABLE IF EXISTS `transaction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCliente` int(11) NOT NULL,
+  `payment_id` varchar(255) DEFAULT NULL,
+  `hash` varchar(255) DEFAULT NULL,
+  `complete` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction`
+--
+
+LOCK TABLES `transaction` WRITE;
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuarios` (
+  `nombre_completo` varchar(30) NOT NULL,
+  `apellidos` varchar(40) NOT NULL,
+  `fecha_nacimiento` int(10) NOT NULL,
+  `correo_electronico` varchar(30) NOT NULL,
+  `nombre_usuario` varchar(20) NOT NULL,
+  `clave` varchar(10) NOT NULL,
+  `rol` int(1) NOT NULL,
+  `id` int(20) NOT NULL,
+  PRIMARY KEY (`nombre_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES ('Juan','Martinez',0,'juan@test.com','juanmnl','a',1,0);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-11-23 18:04:39

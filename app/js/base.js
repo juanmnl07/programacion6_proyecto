@@ -74,54 +74,31 @@ $(document).ready(function() {
   });
 
 //handler formulario mantenimiento de cabanas
-  $("#agregar-cabana").submit(function(event){
-    event.preventDefault();
+  $("#agregar-cabana").submit(function(e){
+    e.preventDefault();
 
-    var codigo = event.target[0]['value'];
-    var capacidad_adultos = event.target[1]['value'];
-    var capacidad_ninos = event.target[2]['value'];
+      var formData = new FormData(this);
 
-    //verificar los datos del tamano
-    if(event.target[3]['checked'] == true){
-      var tamano = event.target[3]['value'];
-    }     
-    
-    if(event.target[4]['checked'] == true){
-      var tamano = event.target[4]['value'];
-    }
+        $.ajax({
+            type:'POST',
+            url: 'agregar_cabana',
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
 
-    if(event.target[5]['checked'] == true){
-      var tamano = event.target[5]['value'];
-    } 
+                var datajson = JSON.parse(data);
 
-    if(event.target[6]['checked'] == true){
-      var aire_acondicionado = event.target[6]['value'];
-    } 
-
-    if(event.target[7]['checked'] == true){
-      var aire_acondicionado = event.target[7]['value'];
-    } 
-
-    if(event.target[8]['checked'] == true){
-      var calefaccion = event.target[8]['value'];
-    } 
-
-    if(event.target[9]['checked'] == true){
-      var calefaccion = event.target[9]['value'];
-    } 
-
-    var descripcion = event.target[10]['value'];
-    var file = event.target[11]['value'];
-
-    $.post( "agregar_cabana", { cod: codigo, cap_adultos: capacidad_adultos, cap_ninos: capacidad_ninos, tam: tamano, aire_acond: aire_acondicionado, calef:calefaccion, desc: descripcion})
-      .done(function( data ) {
-      var datajson = JSON.parse(data);
-      alert( "Mensaje: " + datajson.mensaje );
-
-      //agregamos el regisro en el listado de la tabla
-      $("table#registro-cabanas").append('<tr id="paquete-cod-'+datajson.cod+'"><td class="cod-paquete">'+datajson.cod+'</td><td><button id="'+datajson.cod+'" class="modificar-paquete">modificar</button><button id="'+datajson.cod+'" class="eliminar-paquete">Eliminar</button></td></tr>');
-
-      });
+                $("table#registro-cabanas").append('<tr id="paquete-cod-'+datajson.cod+'"><td class="cod-paquete">'+datajson.cod+'</td><td><button id="'+datajson.cod+'" class="modificar-paquete">modificar</button><button id="'+datajson.cod+'" class="eliminar-paquete">Eliminar</button></td></tr>');
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
 
   });
 

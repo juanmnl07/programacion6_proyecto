@@ -136,7 +136,7 @@
 												<span>Si</span><input type="radio" name="calefaccion" value="si" checked>
 												<span>No</span><input type="radio" name="calefaccion" value="no">
 												
-												<textarea class="descripcion" id="descripcion-cabana" placeholder="Descripción:"></textarea>
+												<textarea class="descripcion" id="descripcion-cabana" placeholder="Descripción:" name="descripcion"></textarea>
 
 												<!-- The fileinput-button span is used to style the file input field as button -->
 											    <span class="btn btn-success fileinput-button">
@@ -146,7 +146,7 @@
 											    </span>
 											    <br>
 											    
-												<input type="submit" value="Agregar cabaña">
+												<input type="submit" value="Agregar cabaña" name="submit">
 											</form>
 									    </div>
 									  </li>

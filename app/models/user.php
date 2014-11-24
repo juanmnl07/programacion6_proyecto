@@ -65,6 +65,10 @@ class User {
 
 	}
 
+	function getUserData($user_name){
+		return getUserInfo($user_name);
+	}
+
 	function closeSession($user_name){
 
 		$this->__destruct();
