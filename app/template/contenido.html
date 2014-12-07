@@ -2,21 +2,18 @@
 	<div id="mensajes">
 		{% if mensaje['estatus'] == 0 %}
 			<div class="flash-error">
-			  <span>{{mensaje['mensaje']}} <a href="#">Ir a inicio de sesion</a></span>
+			  <span>{{mensaje['mensaje']}} <a href="public/home/login">Ir a inicio de sesion</a></span>
 			</div>
-		{% else %} 
+		{% elseif mensaje['estatus'] == 1 %} 
 			<div id="exito"></div>
 			<div class="flash-success">
 			  <span>{{mensaje['mensaje']}}</span>
 			</div>
 		{% endif %}
 	</div>
-<div id="content">
-	{% block content %}
-		{{ content.markup | raw }}
-	{% endblock %}
-</div>
-	{% block sidebar %}
-		{% include 'sidebar.html' %}
-	{% endblock %}
+	<div id="content">
+		{% block content %}
+			{{ content.markup | raw }}
+		{% endblock %}
+	</div>
 </div>

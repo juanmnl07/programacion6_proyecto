@@ -14,9 +14,9 @@
 
 		if(obtenerNombreUsuario()){
 			$datosUsuario = obtenerTodosLosDatosDelUsuario();
-			echo $template->render(array('content' => obtenerContenido($datosUsuario['fullname'].' '.$datosUsuario['lastname'], $datosUsuario['email']), 'title' => 'Contactanos', 'userlogged' => true));
+			echo $template->render(array('content' => obtenerContenido($datosUsuario['fullname'].' '.$datosUsuario['lastname'], $datosUsuario['email']), 'title' => 'Contactanos', 'userlogged' => true, 'mensaje'=>$data['resultado']));
 		}else {
-			echo $template->render(array('content' => obtenerContenido("", ""), 'title' => 'Contactanos', 'userlogged' => false));
+			echo $template->render(array('content' => obtenerContenido("", ""), 'title' => 'Contactanos', 'userlogged' => false, 'mensaje'=>$data['resultado']));
 		}
 
 	}

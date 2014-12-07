@@ -1146,7 +1146,7 @@ article.type-system-serif {
     color: #333;
     display: block;
     font-weight: 400;
-    padding: 0.75em 1.618em; }
+    padding: 0.75em 0.809em; }
     @media screen and (min-width: 40em) {
       .accordion-tabs-minimal a.tab-link {
         display: inline-block;
@@ -1498,5 +1498,36 @@ h4 {
     height: 100%;
     width: 4px;
     background: white; }
+
+#paquete-sererva .row {
+  float: left;
+  height: 50px;
+  line-height: 30px;
+  padding: 10px 5px;
+  width: 100%; }
+
+#paquete-sererva .row > label {
+  float: left;
+  margin-bottom: 0px;
+  width: 25%; }
+
+#paquete-sererva .row > span, #paquete-sererva .row > input {
+  float: left;
+  width: 75%; }
+
+#paquete-sererva .row > span {
+  margin-bottom: 0px; }
+
+#paquete-sererva .row > input {
+  margin-bottom: 0px; }
+
+.datos-personales {
+  float: left;
+  margin: 7% 0px 3% 0px;
+  width: 100%; }
+
+.row-image {
+  float: left;
+  padding: 5% 1%; }
 
 /*# sourceMappingURL=base.css.map */

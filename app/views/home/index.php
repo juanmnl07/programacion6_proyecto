@@ -13,9 +13,9 @@
 		$template = $twig->loadTemplate('base.html');
 	
 		if(obtenerNombreUsuario()){
-			echo $template->render(array('content' => obtenerContenido(), 'title' => 'Registro de usuarios', 'userlogged' => true));
+			echo $template->render(array('content' => obtenerContenido(), 'title' => 'Registro de usuarios', 'userlogged' => true, 'mensaje'=>$data['resultado']));
 		}else {
-			echo $template->render(array('content' => obtenerContenido(), 'title' => 'Registro de usuarios', 'userlogged' => false));
+			echo $template->render(array('content' => obtenerContenido(), 'title' => 'Registro de usuarios', 'userlogged' => false, 'mensaje'=>$data['resultado']));
 		}
 	}?>
 

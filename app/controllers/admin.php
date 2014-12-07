@@ -42,6 +42,9 @@ class Admin extends Controller
 				$costo = $this->model('costo');
 				$costos = $costo->obtenerTodasLosCostos();
 
+				//obtener todas mis reservas
+				$reservas = $paquete->obtenenerMisReservas($_POST['user-name']);
+
 				$this->view('admin/index', ['session' => array(
 					"nombre_completo" => $user->getFullName(), 
 					"apellido" => $user->getApellido(),
@@ -49,9 +52,13 @@ class Admin extends Controller
 					"correo_electronico" => $user->getCorreoElectronico()), 
 					"registro_cabanas" => $cabanas,
 					"registro_paquetes" => $paquetes,
-					"costos" => $costos]);
+					"costos" => $costos,
+					"reservas" => $reservas,
+					"resultado" => array("mensaje" => "Has iniciado sesion satisfactoriamente", 
+									   "estatus" => 1
+					)]);
 			}else{
-				$this->view('admin/index', ['resultado' => array("mensaje" => "No existen registros asociados a esta cuenta, por favor verifica, seras redireccionado al formulario de inicio de sesion.")]);
+				$this->view('admin/index', ['resultado' => array("mensaje" => "No existen registros asociados a esta cuenta, por favor verifica, seras redireccionado al formulario de inicio de sesion.", 'estatus' => 0)]);
 			}
 		} else {
 			//si existe una sesion abierta
@@ -71,6 +78,9 @@ class Admin extends Controller
 				$costo = $this->model('costo');
 				$costos = $costo->obtenerTodasLosCostos();
 
+				//obtener todas mis reservas
+				$reservas = $paquete->obtenenerMisReservas(obtenerNombreUsuario());
+
 				$this->view('admin/index', ['session' => array(
 					"nombre_completo" => $user->getFullName(), 
 					"apellido" => $user->getApellido(),
@@ -78,7 +88,10 @@ class Admin extends Controller
 					"correo_electronico" => $user->getCorreoElectronico()), 
 					"registro_cabanas" => $cabanas,
 					"registro_paquetes" => $paquetes,
-					"costos" => $costos]);
+					"costos" => $costos,
+					"reservas" => $reservas,
+					"resultado" => array("estatus" => 2)
+				]);
 			} else {
 				//la sesion fue cerrada previamente, se redireccionara al home
 				header('Location: http://www.proyecto_progra6.com/public/home/login');
@@ -128,7 +141,7 @@ class Admin extends Controller
 	public function agregar_paquete()
 	{
 		$paquete = $this->model('paquete');
-		$paquete->setPaquete($_POST['codigo_cabana'], $_POST['fecha_ing'],$_POST['fecha_sal'],$_POST['est'], $_POST['id_costo']);
+		$paquete->setPaquete($_POST['codigo_cabana'], $_POST['fecha_ing'],$_POST['fecha_sal'],$_POST['est'], $_POST['id_costo'], $_POST['nombre_paquete']);
 		print_r($paquete->savePaquete());
 	}
 

@@ -76,37 +76,51 @@
 		$template = $twig->loadTemplate('base.html');
 
 		if(obtenerNombreUsuario()){
-			echo $template->render(array('content' => obtenerContenido($data['paquete'], $data['costo'], $redireccionUrl, $data['nombre_completo'], $data['email']), 'title' => '', 'userlogged' => true));
+			echo $template->render(array('content' => obtenerContenido($data['paquete'], $data['costo'], $redireccionUrl, $data['nombre_completo'], $data['email'], $data['imagen']), 'title' => '', 'userlogged' => true, 'mensaje'=>$data['resultado']));
 		} else {
-			echo $template->render(array('content' => obtenerContenido($data['paquete'], $data['costo'], $redireccionUrl, $data['nombre_completo'], $data['email']), 'title' => '', 'userlogged' => false));
+			echo $template->render(array('content' => obtenerContenido($data['paquete'], $data['costo'], $redireccionUrl, $data['nombre_completo'], $data['email'], $data['imagen']), 'title' => '', 'userlogged' => false, 'mensaje'=>$data['resultado']));
 		}
 
 	}
 
 	//Generar formulario
-	function obtenerContenido($paquete, $costo, $redirectUrl, $nombre_completo, $email) {
+	function obtenerContenido($paquete, $costo, $redirectUrl, $nombre_completo, $email, $imagen) {
 
 		if($paquete['id'] != ''){
 			//retornar el detalle del producto
 			return array("markup" => '<div class="paquete" id="paquete-'.$paquete['id'].'">
-											<form action="" metod="post" id="paquete-sererva">
-												<label>Codigo paquete: </label><input type="text" name="coddigo-paquete" value="'.$paquete['id'].'" disabled>
-												<label>Fecha ingreso: </label><span>'.$paquete['fecha_ingreso'].'</span>
-												<label>Fecha salida: </label><span>'.$paquete['fecha_salida'].'</span>
-												<label>Codigo cabaña: </label><span>'.$paquete['id'].'</span>
-												<label>Estado: </label><span>'.$paquete['estado'].'</span>
-												<label>Codigo cliente: </label><span>'.$paquete['id_usuario_cliente'].'</span>
-												<label>Costo: </label><input name="costo" disabled value="'.$costo['costo'].'" type="text">
-												
+											<h1>Paquete</h1>
+											<form action="/public/admin/index" metod="post" id="paquete-sererva">	
+												<div class="row">
+													<label>Codigo: </label><input type="text" name="coddigo-paquete" value="'.$paquete['id'].'" disabled>
+												</div>
+												<div class="row-image">
+													<img src="/app/archivos/files/'.$imagen['nombre_archivo'].'">
+												</div>
+												<div class="row">
+													<label>Nombre: </label><span>'.$paquete['nombre'].'</span>
+												</div>
+												<div class="row">
+													<label>Fecha ingreso: </label><span>'.$paquete['fecha_ingreso'].'</span>
+												</div>
+												<div class="row">
+													<label>Fecha salida: </label><span>'.$paquete['fecha_salida'].'</span>
+												</div>
+												<div class="row">
+													<label>Codigo cabaña: </label><span>'.$paquete['id_cabana'].'</span>
+												</div>
+												<div class="row">
+													<label>Costo: </label><input name="costo" disabled value="'.$costo['costo'].'" type="text">
+												</div>
+												<br>
+												<br>
 												<div class="datos-personales">
-
-												<h2>Datos Personales</h2>
-												<input type="text" placeholder="Nombre" name="nombre" value="'.$nombre_completo.'">
-												<input type="text" placeholder="Correo electronico" name="correo" value="'.$email.'">
-
+													<h2>Datos Personales</h2>
+													<input type="text" placeholder="Nombre" name="nombre" value="'.$nombre_completo.'">
+													<input type="text" placeholder="Correo electronico" name="correo" value="'.$email.'">
 												</div>
 
-												<button name="reservar">Solicitar reservacion</button><a href="'.$redirectUrl.'">Reservar con PayPal</a></div>'
+												<button class="enlace-reserva" name="reservar">Solicitar reservacion</button> | <a href="'.$redirectUrl.'" class="reserva-paypal">Reservar con PayPal</a></div>'
 				);
 		} else {
 			return array("markup" => 'vacio');

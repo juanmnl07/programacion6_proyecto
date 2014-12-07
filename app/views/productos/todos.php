@@ -14,37 +14,37 @@
 
 		if(obtenerNombreUsuario()){
 
-			echo $template->render(array('content' => obtenerContenido($data['paquetes']), 'title' => '', 'userlogged' => true));
+			echo $template->render(array('content' => obtenerContenido($data['paquetes']), 'title' => '', 'userlogged' => true, 'mensaje'=>$data['resultado']));
 		}else {
-			echo $template->render(array('content' => obtenerContenido($data['paquetes']), 'title' => '', 'userlogged' => false));
+			echo $template->render(array('content' => obtenerContenido($data['paquetes']), 'title' => '', 'userlogged' => false, 'mensaje'=>$data['resultado']));
 		}
 
 	}
 
 	//Generar formulario
-	function obtenerContenido($paquetes) {
+	function obtenerContenido($paquete) {
 
-		print_r($paquetes);
-		return array("markup" => '<h1>Nuestros Paquetes</h1>
-									<div class="cards">
-									  <div class="card">
+		$paquetes = "";
+		for ($i=0; $i < count($paquete); $i++) { 
+			$paquetes .= '<div class="card">
 									    <div class="card-image">
-									      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png" alt="">
+									      <a href="/public/productos/pid/'.$paquete[$i]['id'].'"><img src="/app/archivos/files/'.$paquete[$i]['nombre_archivo'].'" alt=""></a>
 									    </div>
 									    <div class="card-header">
-									      First Card
+									      <a href="/public/productos/pid/'.$paquete[$i]['id'].'">'.$paquete[$i]['nombre'].'</a>
 									    </div>
 									    <div class="card-copy">
-									      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, officiis sunt neque facilis culpa molestiae necessitatibus delectus veniam provident.</p>
+									      <p>'.$paquete[$i]['descripcion'].'</p>
 									    </div>
 									    <div class="card-stats">
 									      <ul>
-									        <li>98<span>Items</span></li>
-									        <li>298<span>Things</span></li>
-									        <li>923<span>Objects</span></li>
+									        <li><a href="/public/productos/pid/'.$paquete[$i]['id'].'">Ver más</a></li>
 									      </ul>
 									    </div>
-									   </div>
-									 </div>');
+									   </div>';
+		}
+
+		return array("markup" => '<h1>Nuestros Paquetes</h1>
+									<div class="cards">'.$paquetes.'</div>');
 	}
 ?>

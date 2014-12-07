@@ -14,7 +14,7 @@
 		$twig = new Twig_Environment($loader);
 
 		$template = $twig->loadTemplate('base.html');
-		echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Index'));
+		echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Index', 'mensaje'=>$data['resultado']));
 
 	}
 

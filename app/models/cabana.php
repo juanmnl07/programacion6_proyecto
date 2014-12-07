@@ -85,6 +85,10 @@ class Cabana {
 		return $this->capacidad_adultos;
 	}
 
+	function getImagen($id_cabana){
+		return getFileName($id_cabana);
+	}
+
 	function getCapacidadNinos(){
 		return $this->capacidad_ninos;
 	}
@@ -115,6 +119,10 @@ class Cabana {
 
 	function obtenerTodasLasCabanas(){
 		return getAllCabanas();
+	}
+
+	function obtenerCabana($id_cabana){
+		return getCabana($id_cabana);
 	}
 
 	function __destruct(){

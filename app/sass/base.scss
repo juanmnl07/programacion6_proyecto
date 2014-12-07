@@ -1170,7 +1170,7 @@ $sliding-menu-color-hover: #fff;
     color: $dark-gray;
     display: block;
     font-weight: 400;
-    padding: $base-spacing/2 $gutter;
+    padding: $base-spacing/2 $gutter/2;
 
     @include media($tab-mode) {
       @include inline-block;
@@ -1652,4 +1652,40 @@ h4 {
   }
 }
 
-  
+#paquete-sererva .row {
+    float: left;
+    height: 50px;
+    line-height: 30px;
+    padding: 10px 5px;
+    width: 100%;
+}
+
+#paquete-sererva .row > label {
+    float: left;
+    margin-bottom: 0px;
+    width: 25%;
+}
+
+#paquete-sererva .row > span, #paquete-sererva .row > input {
+    float: left;
+    width: 75%;
+}
+
+#paquete-sererva .row > span{
+    margin-bottom: 0px;
+}
+
+#paquete-sererva .row > input {
+    margin-bottom: 0px;
+}
+
+.datos-personales {
+  float: left;
+    margin: 7% 0px 3% 0px;
+    width: 100%;
+}
+
+.row-image {
+    float: left;
+    padding: 5% 1%;
+}

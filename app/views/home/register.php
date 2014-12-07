@@ -15,7 +15,7 @@
 
 			$template = $twig->loadTemplate('base.html');
 
-			echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Registro de usuarios'));
+			echo $template->render(array('content' => obtenerFormulario(), 'title' => 'Registro de usuarios', 'mensaje'=>$data['resultado']));
 
 		}
 	} else {

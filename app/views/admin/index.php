@@ -12,7 +12,7 @@
 	
 		//verificamos si el usuario ingreso por medio del formulario de inicio de sesio o por medio del registro
 		if(isset($data['session'])){
-			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session'], $data['registro_cabanas'], $data['registro_paquetes'], $data['costos']), 'title' => 'Dashboard', 'userlogged' => true));
+			echo $template->render(array('content' => obtenerContenidoUsuarioSesion($data['session'], $data['registro_cabanas'], $data['registro_paquetes'], $data['costos'], $data['reservas']), 'title' => 'Dashboard', 'userlogged' => true, 'mensaje'=>$data['resultado']));
 		}else {
 			echo $template->render(array('content' => obtenerContenidoUsuarioRegistro(), 'title' => 'Dashboard','mensaje'=>$data['resultado'], 'userlogged' => false));
 		}
@@ -34,12 +34,13 @@
 }
 
 	//Generar formulario
-	function obtenerContenidoUsuarioSesion($user_info, $registro_cabanas, $registro_paquetes, $costos) {
+	function obtenerContenidoUsuarioSesion($user_info, $registro_cabanas, $registro_paquetes, $costos, $registro_reservas) {
 
 		$content = "";
 		$content_paquetes = "";
 		$listado_costos = "";
 		$codigos_cabanas = "<select name=\"codigos-cabanas\">";
+		$reservas = "";
 
 		//llenar los costos predefinidos
 		for ($i=0; $i < count($costos); $i++) { 
@@ -54,6 +55,20 @@
 						    </tr>";
 
 			$codigos_cabanas .= "<option value=\"".$registro_cabanas[$i]['id']."\">".$registro_cabanas[$i]['id']."</option>";
+
+		}
+
+
+		if ($registro_reservas[0]['id_paquete_reserva'] !=''){
+
+			for ($i=0; $i < count($registro_reservas); $i++) { 
+				$reservas .= "<tr id=\"cabana-cod-".$registro_reservas[$i]['id_paquete_reserva']."\">
+							      <td class=\"nombre-paquete\">".$registro_reservas[$i]['nombre']."</td>
+							      <td class=\"fecha-ingreso\">".$registro_reservas[$i]['fecha_ingreso']."</td>
+							      <td class=\"fecha-salida\">".$registro_reservas[$i]['fecha_salida']."</td>
+							      <td><button id=\"".$registro_reservas[$i]['id_paquete_reserva']."\" class=\"cancelar-reserva\">Cancelar</button></td>
+							    </tr>";
+			}
 
 		}
 
@@ -170,6 +185,7 @@
 											<form action="" method="post" id="agregar-paquete">
 												<label>Cabaña</label>'
 												.$codigos_cabanas.'
+												<input type="text" name="nombre" placeholder="Nombre:">
 												<input type="text" name="fecha-ingreso" placeholder="Fecha ingreso:">
 												<input type="text" name="fecha-salida" placeholder="Fecha salida:">
 												
@@ -193,7 +209,20 @@
 									  <li class="tab-header-and-content">
 									    <a href="#" class="tab-link">Reservas</a>
 									    <div class="tab-content">
-									      <p>Donec mattis mauris gravida metus laoreet non rutrum sem viverra. Aenean nibh libero, viverra vel vestibulum in, porttitor ut sapien. Phasellus tempor lorem id justo ornare tincidunt. Nulla faucibus, purus eu placerat fermentum, velit mi iaculis nunc, bibendum tincidunt ipsum justo eu mauris. Nulla facilisi. Vestibulum vel lectus ac purus tempus suscipit nec sit amet eros. Nullam fringilla, enim eu lobortis dapibus, quam magna tincidunt nibh, sit amet imperdiet dolor justo congue turpis.</p>    
+									       <h4>Mis reservas</h4>
+									      <table class="table-borders" id="registro-reservas">
+											  <thead>
+											    <tr>
+											      <th>Nombre</th>
+											      <th>Fecha ingreso</th>
+											      <th>Fecha salida</th>
+											      <th>Opciones</th>
+											    </tr>
+											  </thead>
+											  <tbody>'
+											  	.$reservas.
+											  '</tbody>
+											  </table>
 									    </div>
 									  </li>
 									  </li>

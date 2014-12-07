@@ -49,6 +49,10 @@ class User {
 		return writeUser(array($this->nombre, $this->apellido, $this->fecha_nacimiento, $this->correo_electronico, $this->nombre_usuario, $this->clave));
 	}
 
+	function obtenterIdUsuario($user_name){
+		return getIdUser($user_name);
+	}
+
 	function openSession($user_name){
 		
 		//vamos a utilizar los datos obtenidos por medio de la consulta a la base de datos para incializar los datos correspondientes al usuario

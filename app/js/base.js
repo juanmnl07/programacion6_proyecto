@@ -107,16 +107,16 @@ $(document).ready(function() {
     event.preventDefault();
 
     var cod_cabana = event.target[0]['value'];
-    var fecha_ingreso = event.target[1]['value'];
-    var fecha_salida = event.target[2]['value'];
-    var estado = event.target[3]['value'];
-    var costo = event.target[4]['value'];
+    var nombre = event.target[1]['value'];
+    var fecha_ingreso = event.target[2]['value'];
+    var fecha_salida = event.target[3]['value'];
+    var estado = event.target[4]['value'];
+    var costo = event.target[5]['value'];
 
-        console.log(costo);
 
-    $.post( "agregar_paquete", { codigo_cabana: cod_cabana, fecha_ing: fecha_ingreso, fecha_sal: fecha_salida, est: estado, id_costo: costo})
+    $.post( "agregar_paquete", { codigo_cabana: cod_cabana, fecha_ing: fecha_ingreso, fecha_sal: fecha_salida, est: estado, id_costo: costo, nombre_paquete: nombre})
       .done(function( data ) {
-      alert( "Mensaje: " + data.mensaje);
+      alert( "Mensaje: " + data);
     });
 
   });
@@ -146,6 +146,36 @@ $(document).ready(function() {
       $('#paquete-cod-'+cod_paquete).fadeOut(300, function(){ $(this).remove();});
 
     });
+  });
+
+//handler formulario reservas
+  $("#paquete-sererva").submit(function(e){
+    e.preventDefault();
+
+      var formData = new FormData(this);
+      console.log(formData);
+
+        $.ajax({
+            type:'POST',
+            url: '/public/productos/reservar',
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+/*
+                var datajson = JSON.parse(data);
+
+                $("table#registro-cabanas").append('<tr id="paquete-cod-'+datajson.cod+'"><td class="cod-paquete">'+datajson.cod+'</td><td><button id="'+datajson.cod+'" class="modificar-paquete">modificar</button><button id="'+datajson.cod+'" class="eliminar-paquete">Eliminar</button></td></tr>');*/
+            },
+            error: function(data){
+                /*console.log("error");
+                console.log(data);*/
+            }
+        });
+
   });
 
 }); 
